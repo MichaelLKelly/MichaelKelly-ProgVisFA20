@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Love Me Don't CSV</title>
+        <script src= "https://d3js.org/d3.v6.js"></script>
+        <style type="text/css">
+
+          body{
+            background-color: black;
+            max-width: 800px;
+            margin: 20px;
+          }
+          h1{
+            color: white;
+          }
+          p {
+            color: white;
+            font-size: 21px;
+          }
+          .songLabel {
+            fill: white;
+            font-family: sans-serif;
+            font-size: 12px;
+          }
+
+
+        </style>
+    </head>
+    <body>
+      <h1>Love Me Don't? </br>(Lisa's rankings, updated weekly.)</h1>
+      <p>White mops represent a high score of 6, with darker hair suggesting a lower ranking.</br>
+      Pure zero ("Did not like") is complete black.</p>
+
+        <svg></svg>
+
+        <script type="text/javascript">
+
+        d3.csv("ForLisaRankings_092020.csv").then(dataset =>{
+
+        const maxData = 6;
+        const minData = d3.min(dataset, d => +d.Lisa);
+        const myColor = d3.scaleLinear()
+                          .domain([minData, maxData])
+                          .range(["black", "white"]);
+
+        //the SVG path for the mop hairdo - subject to editing
+        const mop = ["M250,15 C450,90 350,270, 325,285 C330,220 295,230 280,190 C280,200 260,217 257,217 C270,200 260,175 257,188 C245,200 235,210 225,213 C230,205 235,190 226,192 C190,220 125,210 93,215 C60,220 45,270 40,285 C35,275 -85,15 250,15"];
+
+        const row = 5;
+        const size = 150;
+
+        const svgWidth = 1000;
+        // const svgHeight = 800;
+        const svgHeight = (Math.round(dataset.length / row)) * ((svgWidth / row) * 1.2);
+
+        const svg = d3.select("svg")
+          .attr("width", svgWidth)
+          .attr("height", svgHeight);
+
+        const g = svg.selectAll("g")
+          .data(dataset, d=>d)
+          .enter()
+          .append("g")
+          .attr("transform", (d,i)=>{
+                const x = (i % row) * (svgWidth / row);
+                const y = (Math.floor(i/row)) * (svgWidth / row) * 1.2;
+                return 'translate(' + [x,y] + ')';});
+
+      g.append("path")
+       .attr("d", mop)
+       .attr("stroke", "grey")
+       .attr("stroke-width", "3px")
+       .attr("transform", (d,i)=>{
+                return 'scale(' + ((1/row) * 2.5) + ')';})
+                // would still like to fix the above so it's not a set number but a variable
+      .attr("fill", d=> myColor(+d.Lisa));
+
+
+        g.append("text")
+          .attr("class", "songLabel")
+          .attr("x", (svgWidth / row) / 2)
+          .attr("y", (svgWidth / row) * .9)
+          .attr("text-anchor", "middle")
+          .text(d=>d.Song);
+
+        })
+
+        </script>
+    </body>
+  </html>
