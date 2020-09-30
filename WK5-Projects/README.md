@@ -14,6 +14,6 @@ Below are representative screenshots of the entire piece, which scrolls a fair a
 
 /WK5-Projects/wk5_Color_Context_MKelly_screenshot1.png "Screenshot1"
 
+![alt text](/https://github.com/MichaelLKelly/MichaelKelly-ProgVisFA20/blob/master/WK5-Projects/wk5_Color_Context_MKelly_screenshot1.png "Screenshot1")
 
 
-https://github.com/MichaelLKelly/MichaelKelly-ProgVisFA20/blob/master/WK5-Projects/wk5_Color_Context_MKelly_screenshot1.png
