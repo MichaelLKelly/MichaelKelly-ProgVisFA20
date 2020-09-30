@@ -12,6 +12,32 @@ The text (or most of it) is of course by Pater, and the color designations are s
 
 Below are representative screenshots of the entire piece, which scrolls a fair amount. (Internal page links are used to jump from color group to color group.)
 
-![Screenshot1](/WK5-Projects/wk5_Color_Context_MKelly_screenshot1.png "Screenshot1")
+![MKelly_Color_Screenshot1](/WK5-Projects/wk5_Color_Context_MKelly_screenshot1.png "MKelly_Color_Screenshot1")
+
+---------------------------------------------------------------------------------------
+
+![MKelly_Color_Screenshot2](/WK5-Projects/wk5_Color_Context_MKelly_screenshot2.png "MKelly_Color_Screenshot2")
+
+---------------------------------------------------------------------------------------
+
+![MKelly_Color_Screenshot3](/WK5-Projects/wk5_Color_Context_MKelly_screenshot3.png "MKelly_Color_Screenshot3")
+
+---------------------------------------------------------------------------------------
+
+![MKelly_Color_Screenshot4](/WK5-Projects/wk5_Color_Context_MKelly_screenshot4.png "MKelly_Color_Screenshot4")
+
+---------------------------------------------------------------------------------------
+
+![MKelly_Color_Screenshot5](/WK5-Projects/wk5_Color_Context_MKelly_screenshot5.png "MKelly_Color_Screenshot5")
+
+---------------------------------------------------------------------------------------
+
+![MKelly_Color_Screenshot6](/WK5-Projects/wk5_Color_Context_MKelly_screenshot6.png "MKelly_Color_Screenshot6")
+
+---------------------------------------------------------------------------------------
+
+![MKelly_Color_Screenshot7](/WK5-Projects/wk5_Color_Context_MKelly_screenshot7.png "MKelly_Color_Screenshot7")
+
+---------------------------------------------------------------------------------------
 
 
