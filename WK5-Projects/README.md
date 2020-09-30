@@ -13,3 +13,7 @@ The text (or most of it) is of course by Pater, and the color designations are s
 Below are representative screenshots of the entire piece, which scrolls a fair amount. (Internal page links are used to jump from color group to color group.)
 
 /WK5-Projects/wk5_Color_Context_MKelly_screenshot1.png "Screenshot1"
+
+
+
+https://github.com/MichaelLKelly/MichaelKelly-ProgVisFA20/blob/master/WK5-Projects/wk5_Color_Context_MKelly_screenshot1.png
