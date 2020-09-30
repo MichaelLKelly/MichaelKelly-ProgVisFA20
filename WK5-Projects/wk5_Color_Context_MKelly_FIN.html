@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Color, Context, Meaning</title>
+        <script type="text/javascript" src= "https://d3js.org/d3.v6.js"></script>
+        <style type="text/css">
+
+        body {
+          /* earlier attempts at trying gradients for the entire background */
+          /* background-image: linear-gradient(to right, black, lightgray); */
+          /* background-image: linear-gradient(to right, sienna, wheat); */
+          background-color: snow;
+          margin: 60px;
+          width: 800px;
+          }
+
+        	svg{
+            width:600px;
+          }
+          div{
+            width:600px;
+            padding-bottom: 30px;
+            color: darkslategray;
+          }
+          div.nav{
+            width:600px;
+            color: black;
+            padding-bottom: 10px;
+            font-family: sans-serif;
+            color: darkslategray;
+          }
+          h1{
+            font-family: sans-serif;
+            color: darkslategrey;
+          }
+          p {
+            font-size: 18px;
+            font-family: sans-serif;
+            line-height: 1.5;
+            color: darkslategrey;
+          }
+          hr{
+            border: 2px solid darkslategrey;
+          }
+          .colorLabel {
+            fill: whitesmoke;
+            font-family: sans-serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+          }
+          a {
+            color: darkslategrey;
+          }
+
+        </style>
+
+    </head>
+
+    <body>
+      <a name ="Top"></a>
+      <div>
+      <h1>Just as the meaning of a color changes based on the culture in which it is displayed, so too is the color's shade affected by its background. Sometimes subtly, sometimes dramatically — as seen in the standard html named colors below.</h1>
+      <p>All text is from The Politics of Design by Ruben Pater (&#169; 2016). Color names and values are courtesy of <a href = https://htmlcolorcodes.com/color-names/>htmlcolorcodes.com</a> and use their designations for color categories (e.g. Reds, Oranges, etc.).</p>
+    </div>
+
+    <a name ="Red"></a>
+    <div id="divR">
+    <hr>
+    <div class="nav" style="color:darkslategrey;")>
+      <a href="#Red">Red</a> | <a href="#Orange">Orange</a> | <a href="#Yellow">Yellow</a> | <a href="#Green">Green</a> | <a href="#Blue">Blue</a> | <a href="#Purple">Purple</a> | <a href="#Top">Back to Top</a>
+    </div>
+
+
+      <h1 style="color:darkred">How is 'Red' Seen?</h1>
+      <p>"Red comes from the Sanskrit word for blood. In Greek mythology it was the colour for the planet Mars and the god of war. Red is the most important colour in China and means good luck and happiness. Red promotes long life, and it is used in Chinese new year celebrations. Red is the traditional colour for brides in India and Nepal. In Japan, a red kimono symbolizes happiness and good luck. In Japan’s Shinto religion, red is the symbol of life. The Russian word for red has the same root in Old Russian as the word ‘beautiful’. The oldest symbol of socialism is the red flag, and red is still associated with socialist and communist parties. The red shirts, or the red movement, was the name of those who opposed the 2006 military coup in Thailand."<p>
+
+      <svg width="600" id="svgR"></svg>
+    </div>
+
+    <a name="Orange"></a>
+    <div id="divO">
+    <hr>
+    <div class="nav" style="color:darkslategrey;")>
+      <a href="#Red">Red</a> | <a href="#Orange">Orange</a> | <a href="#Yellow">Yellow</a> | <a href="#Green">Green</a> | <a href="#Blue">Blue</a> | <a href="#Purple">Purple</a> | <a href="#Top">Back to Top</a>
+    </div>
+
+      <h1 style="color:darkorange">How is 'Orange' seen?</h1>
+      <p>"Orange comes from the Sanskrit word for orange tree. In Asia it is known as saffron, named after the spice. In Hinduism, the divinity Krishna is portrayed dressed in saffron. In Buddhism, saffron is the colour of illumination, the highest state of perfection, and the colour of robes worn by monks. Orange ribbons are used to promote awareness and prevention of self-injury. In Northern Ireland, the protestant order is called the Orangemen, who wear orange during annual marches. Orange is the colour of the Dutch monarchy, and in South Africa, orange was the colour of the ruling party during Apartheid. Prisoners are often dressed in orange to make them distinctive in case of escape."</p>
+
+      <svg width="600" height="400" id="svgO"></svg>
+    </div>
+
+    <a name="Yellow"></a>
+    <div id="divY">
+      <hr>
+      <div class="nav" style="color:darkslategrey;")>
+        <a href="#Red">Red</a> | <a href="#Orange">Orange</a> | <a href="#Yellow">Yellow</a> | <a href="#Green">Green</a> | <a href="#Blue">Blue</a> | <a href="#Purple">Purple</a> | <a href="#Top">Back to Top</a>
+      </div>
+
+      <h1 style="color:gold">How is 'Yellow' seen?</h1>
+      <p>"Yellow is the most visible color from a distance, so it is often used for objects that need high visibility, such as ambulances, road maintenance equipment, and taxis. In East Asia, yellow is considered sacred and imperial. In China it is the colour for royalty, and during the Qing Dynasty, only members of the imperial household were permitted to wear yellow. In China it is still seen as the color of happiness, glory, wisdom, harmony, and culture. Yellow is used to symbolise gold as one of the colours of the Catholic church and the Vatican. Yellow in Italian is giallo and a nickname for crime stories. The demonstrations in the Philippines in 1986 were also known as the yellow revolution."</p>
+
+      <svg width="600" height="400" id="svgY"></svg>
+    </div>
+
+
+    <a name="Green"></a>
+    <div id="divG">
+      <hr>
+      <div class="nav" style="color:darkslategrey;")>
+        <a href="#Red">Red</a> | <a href="#Orange">Orange</a> | <a href="#Yellow">Yellow</a> | <a href="#Green">Green</a> | <a href="#Blue">Blue</a> | <a href="#Purple">Purple</a> | <a href="#Top">Back to Top</a>
+      </div>
+
+      <h1 style="color:forestgreen">How is 'Green' seen?</h1>
+      <p>"Green is the colour of nature in many cultures. Early rituals centered on the hope of a good harvest with green vegetables. Green is the traditional colour of Islam, the colour of the prophet Muhammed, which is why many flags in the Islamic world use the colour green. Since the 1980s, green has become the colour of environmental parties and organisations. Green parties in Europe have programmes based on ecology and environment. The word greenwashing is sued to describe the advertising of companies that use positive environmental practices to cover up environmentally unfriendly activities. A ‘green room’ is used in television and theatre to quiet nervous performers.""</p>
+
+      <svg width="600" height="400" id="svgG"></svg>
+    </div>
+
+    <a name="Blue"></a>
+    <div id="divB">
+      <hr>
+      <div class="nav" style="color:darkslategrey;")>
+        <a href="#Red">Red</a> | <a href="#Orange">Orange</a> | <a href="#Yellow">Yellow</a> | <a href="#Green">Green</a> | <a href="#Blue">Blue</a> | <a href="#Purple">Purple</a> | <a href="#Top">Back to Top</a>
+      </div>
+
+      <h1 style="color:steelblue">How is 'Blue' seen?</h1>
+      <p>"Blue is tested as the colour that is best liked by all cultures, which is how it became the colour for international business. The United Nations chose blue as a colour in 1946, but the colour has no special significance. Bluewashing is a term for companies that join the United Nations ‘Global Impact Initiative’ only for PR reasons. ‘Blue collar worker’ refers to the shirts worn by people working manual labour jobs. The Tuareg of North Africa wear blue turbans, dyed with indigo. Azure blue is the national colour of Italy, the national soccer team is called the Azzurri. Several languages, like Japanese, Thai, Korean, and Lakota Sioux, use the same word to describe blue and green."</p>
+
+      <svg width="600" height="400" id="svgB"></svg>
+    </div>
+
+    <a name="Purple"></a>
+    <div id="divP">
+      <hr>
+      <div class="nav" style="color:darkslategrey;")>
+        <a href="#Red">Red</a> | <a href="#Orange">Orange</a> | <a href="#Yellow">Yellow</a> | <a href="#Green">Green</a> | <a href="#Blue">Blue</a> | <a href="#Purple">Purple</a> | <a href="#Top">Back to Top</a>
+      </div>
+
+      <h1 style="color:darkmagenta">How is 'Purple' seen?</h1>
+      <p style>"Purple was the most expensive dye in Roman times, and was worn by Roman magistrates, Byzantine emperors, and the rulers of the Holy Roman Empire. During the reign of Elizabeth I, only royalty was allowed to wear purple in England. Roman Catholic bishops still wear purple as a colour of royalty. In Japan, the colour is traditionally associated with the emperor and aristocracy. In Thailand, widows in mourning wear purple. In Western politics the colour purple is neutral, and used for a coalition between a left-wing and a right-wing party. The Women’s Suffrage movement used purple, and the colourways adopted in the 1970s by the women’s liberation movement. Purple and pink are both associated with the LGBT community."</p>
+
+      <svg width="600" height="400" id="svgP"></svg>
+    </div>
+
+    <div>
+      <hr>
+      <div class="nav" style="color:darkslategrey;")>
+        <a href="#Red">Red</a> | <a href="#Orange">Orange</a> | <a href="#Yellow">Yellow</a> | <a href="#Green">Green</a> | <a href="#Blue">Blue</a> | <a href="#Purple">Purple</a> | <a href="#Top">Back to Top</a>
+      </div>
+    </div>
+
+
+    <script>
+
+    // for background blocks - covers all colors
+    const backset = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+    const maxData = d3.max(backset);
+    const minData = d3.min(backset);
+
+    const backColor = d3.scaleSequential()
+      .domain([minData, maxData])
+      // .interpolator(d3.interpolate("slategrey","silver"));
+      .interpolator(d3.interpolate("black","whitesmoke"));
+      // .interpolator(d3.interpolate("darkslategrey","lightgray"));
+
+
+d3.csv("RedColorTest.csv").then(dataset =>{
+    const barHeight = 40
+    const svgRwidth = 600;
+    const svgRheight = ((dataset.length * (barHeight + barHeight/2)) + barHeight/2);
+
+
+    const svgR = d3.select("#svgR")
+      .attr("width", svgRwidth)
+      .attr("height", svgRheight);
+
+    svgR.selectAll("rect")
+      .data(backset)
+      .enter()
+      .append("rect")
+      .attr("x", (d,i) => i * (svgRwidth/backset.length))
+      .attr("y", 0)
+      .attr("width", (svgRwidth/backset.length))
+      .attr("height", svgRheight)
+      .style("fill", d => backColor(d))
+      .style("opacity", .9)
+      ;
+
+    svgR.selectAll("line")
+      .data(dataset)
+      .enter()
+      .append("line")
+      .attr("x1",30)
+      .attr("y1", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("x2", svgRwidth - 30)
+      .attr("y2", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("stroke", d => d.RGB)
+      .attr("stroke-width","" + barHeight + "px")
+      // the dashed line to create separate boxes of the same color - it's from a web search but figured I'd give it a shot
+      .style("stroke-dasharray", ("140,60"))
+      ;
+
+    svgR.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(d=>d.HTMLName)
+        .attr("x", (svgRwidth / 2))
+        .attr("y", (d,i) => (i * (barHeight + barHeight/2)) + (1.8 * barHeight))
+        .attr("text-anchor", "middle")
+        .attr("class", "colorLabel")
+        ;
+
+// ends the R csv read function
+})
+
+d3.csv("OrangeColorTest.csv").then(dataset =>{
+    const barHeight = 40
+    const svgOwidth = 600;
+    const svgOheight = ((dataset.length * (barHeight + barHeight/2)) + barHeight/2);
+
+    const svgO = d3.select("#svgO")
+      .attr("width", svgOwidth)
+      .attr("height", svgOheight);
+
+      svgO.selectAll("rect")
+        .data(backset)
+        .enter()
+        .append("rect")
+        .attr("x", (d,i) => i * (svgOwidth/backset.length))
+        .attr("y", 0)
+        .attr("width", (svgOwidth/backset.length))
+        .attr("height", svgOheight)
+        .style("fill", d => backColor(d))
+        .style("opacity", .9)
+        ;
+
+
+    svgO.selectAll("line")
+      .data(dataset)
+      .enter()
+      .append("line")
+      .attr("x1",30)
+      .attr("y1", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("x2", svgOwidth - 30)
+      .attr("y2", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("stroke", d => d.RGB)
+      .attr("stroke-width","" + barHeight + "px")
+      .style("stroke-dasharray", ("140,60"));
+
+    svgO.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(d=>d.HTMLName)
+        .attr("x", (svgOwidth / 2))
+        .attr("y", (d,i) => (i * (barHeight + barHeight/2)) + (1.8 * barHeight))
+        .attr("text-anchor", "middle")
+        .attr("class", "colorLabel")
+        ;
+
+// ends the O csv read function
+})
+
+d3.csv("YellowColorTest.csv").then(dataset =>{
+    const barHeight = 40
+    const svgYwidth = 600;
+    const svgYheight = ((dataset.length * (barHeight + barHeight/2)) + barHeight/2);
+
+    const svgY = d3.select("#svgY")
+      .attr("width", svgYwidth)
+      .attr("height", svgYheight);
+
+      svgY.selectAll("rect")
+        .data(backset)
+        .enter()
+        .append("rect")
+        .attr("x", (d,i) => i * (svgYwidth/backset.length))
+        .attr("y", 0)
+        .attr("width", (svgYwidth/backset.length))
+        .attr("height", svgYheight)
+        .style("fill", d => backColor(d))
+        .style("opacity", .9)
+        ;
+
+
+    svgY.selectAll("line")
+      .data(dataset)
+      .enter()
+      .append("line")
+      .attr("x1",30)
+      .attr("y1", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("x2", svgYwidth - 30)
+      .attr("y2", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("stroke", d => d.RGB)
+      .attr("stroke-width","" + barHeight + "px")
+      .style("stroke-dasharray", ("140,60"));
+
+    svgY.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(d=>d.HTMLName)
+        .attr("x", (svgYwidth / 2))
+        .attr("y", (d,i) => (i * (barHeight + barHeight/2)) + (1.8 * barHeight))
+        .attr("text-anchor", "middle")
+        .attr("class", "colorLabel")
+        ;
+
+// ends the Y csv read function
+})
+
+d3.csv("GreenColorTest.csv").then(dataset =>{
+    const barHeight = 40
+    const svgGwidth = 600;
+    const svgGheight = ((dataset.length * (barHeight + barHeight/2)) + barHeight/2);
+
+
+    const svgG = d3.select("#svgG")
+      .attr("width", svgGwidth)
+      .attr("height", svgGheight);
+
+    svgG.selectAll("rect")
+      .data(backset)
+      .enter()
+      .append("rect")
+      .attr("x", (d,i) => i * (svgGwidth/backset.length))
+      .attr("y", 0)
+      .attr("width", (svgGwidth/backset.length))
+      .attr("height", svgGheight)
+      .style("fill", d => backColor(d))
+      .style("opacity", .9)
+      ;
+
+    svgG.selectAll("line")
+      .data(dataset)
+      .enter()
+      .append("line")
+      .attr("x1",30)
+      .attr("y1", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("x2", svgGwidth - 30)
+      .attr("y2", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("stroke", d => d.RGB)
+      .attr("stroke-width","" + barHeight + "px")
+      .style("stroke-dasharray", ("140,60"));
+
+    svgG.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(d=>d.HTMLName)
+        .attr("x", (svgGwidth / 2))
+        .attr("y", (d,i) => (i * (barHeight + barHeight/2)) + (1.8 * barHeight))
+        .attr("text-anchor", "middle")
+        .attr("class", "colorLabel")
+        ;
+
+// ends the G csv read function
+})
+
+d3.csv("BlueColorTest.csv").then(dataset =>{
+    const barHeight = 40
+    const svgBwidth = 600;
+    const svgBheight = ((dataset.length * (barHeight + barHeight/2)) + barHeight/2);
+
+    const svgB = d3.select("#svgB")
+      .attr("width", svgBwidth)
+      .attr("height", svgBheight);
+
+      svgB.selectAll("rect")
+        .data(backset)
+        .enter()
+        .append("rect")
+        .attr("x", (d,i) => i * (svgBwidth/backset.length))
+        .attr("y", 0)
+        .attr("width", (svgBwidth/backset.length))
+        .attr("height", svgBheight)
+        .style("fill", d => backColor(d))
+        .style("opacity", .9)
+        ;
+
+    svgB.selectAll("line")
+      .data(dataset)
+      .enter()
+      .append("line")
+      .attr("x1",30)
+      .attr("y1", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("x2", svgBwidth - 30)
+      .attr("y2", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("stroke", d => d.RGB)
+      .attr("stroke-width","" + barHeight + "px")
+      .style("stroke-dasharray", ("140,60"));
+
+    svgB.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(d=>d.HTMLName)
+        .attr("x", (svgBwidth / 2))
+        .attr("y", (d,i) => (i * (barHeight + barHeight/2)) + (1.8 * barHeight))
+        .attr("text-anchor", "middle")
+        .attr("class", "colorLabel")
+        ;
+
+// ends the B csv read function
+})
+
+d3.csv("PurpleColorTest.csv").then(dataset =>{
+    const barHeight = 40
+    const svgPwidth = 600;
+    const svgPheight = ((dataset.length * (barHeight + barHeight/2)) + barHeight/2);
+
+    const svgP = d3.select("#svgP")
+      .attr("width", svgPwidth)
+      .attr("height", svgPheight);
+
+      svgP.selectAll("rect")
+        .data(backset)
+        .enter()
+        .append("rect")
+        .attr("x", (d,i) => i * (svgPwidth/backset.length))
+        .attr("y", 0)
+        .attr("width", (svgPwidth/backset.length))
+        .attr("height", svgPheight)
+        .style("fill", d => backColor(d))
+        .style("opacity", .9)
+        ;
+
+
+    svgP.selectAll("line")
+      .data(dataset)
+      .enter()
+      .append("line")
+      .attr("x1",30)
+      .attr("y1", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("x2", svgPwidth - 30)
+      .attr("y2", (d,i) => (i * (barHeight + barHeight/2)) + barHeight)
+      .attr("stroke", d => d.RGB)
+      .attr("stroke-width","" + barHeight + "px")
+      .style("stroke-dasharray", ("140,60"));
+
+    svgP.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(d=>d.HTMLName)
+        .attr("x", (svgPwidth / 2))
+        .attr("y", (d,i) => (i * (barHeight + barHeight/2)) + (1.8 * barHeight))
+        .attr("text-anchor", "middle")
+        .attr("class", "colorLabel")
+        ;
+
+// ends the P csv read function
+})
+
+
+    </script>
+
+
+    </body>
+</html>
