@@ -40,4 +40,6 @@ Below are representative screenshots of the entire piece, which scrolls a fair a
 
 ---------------------------------------------------------------------------------------
 
+![MKelly_Color_Screenshot8](/WK5-Projects/wk5_Color_Context_MKelly_screenshot8.png "MKelly_Color_Screenshot8")
 
+---------------------------------------------------------------------------------------
