@@ -13,7 +13,7 @@ Below are representative screenshots of the interaction's progression.
 In addition, a second chart of the album's individual song rankings is displayed. (This data is supplied by a separate CSV.)
 ![Wk7_Screenshot_2_MKelly.png](/WK7-Projects/Wk7_Screenshot_2_MKelly.png "MKelly_Beatles_Screenshot2")
 
-3. Single clicks on other albums reveal tooltips for each. (It was also the intention that the second chart woudl update for each album, but I haven't quite figured out that code.)
+3. Single clicks on other albums reveal tooltips for each. (It was also the intention that the second chart would update for each album, but I haven't quite figured out that code.)
 ![Wk7_Screenshot_3_MKelly.png](/WK7-Projects/Wk7_Screenshot_3_MKelly.png "MKelly_Beatles_Screenshot3")
 ![Wk7_Screenshot_4_MKelly.png](/WK7-Projects/Wk7_Screenshot_4_MKelly.png "MKelly_Beatles_Screenshot4")
 
