@@ -1,7 +1,7 @@
 Week 7 Homework
-
+======================
 Interactive Beatles Rankings 
-
+------------------------
 For this week's interactive visualization, I chose to rework some earlier charts to take advantage of interactivity. (I also took this opportunity to update the file by having it access the data in a CSV.) Previously I had created a ranking of Beatles albums based on my friend's reviews, with line height showing average rating of songs for the album and circle size showing percentage of songs on the album that were 'liked' to begin with. Introducing interactivity allowed me to make the circle-percentage a clickable animation, to reveal a tooltip with the precise percentage of songs, and to introduce a second chart on demand.
 
 Below are representative screenshots of the interaction's progression.
