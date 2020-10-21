@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Beatles Doughnuts</title>
+        <script type="text/javascript" src= "https://d3js.org/d3.v6.js"></script>
+        <style type="text/css">
+
+            body {
+              background-image: linear-gradient(170deg, peru, tan);
+              width: 900px;
+              margin-left: 30px;
+            }
+
+            hr{
+                border: 1px solid black;
+            }
+
+            h1 {
+              fill: black;
+              font-family: "Helvetica", sans-serif;
+              font-size: 30px;
+              font-weight: bold;
+            }
+            p{
+              fill: black;
+              font-family: "Helvetica", sans-serif;
+              font-size: 18px;
+            }
+
+            .charttitle {
+              fill: black;
+              font-family: "Helvetica", sans-serif;
+              font-size: 18px;
+            }
+
+            .labels{
+            font-size: 11px;
+            font-weight: bold;
+            font-family: sans-serif;
+            background-color: black;
+            fill: gold;
+            /* text-shadow: 0px 0px black; */
+            }
+
+          .albumLabel {
+            font-size: 14px;
+            font-family: sans-serif;
+            fill: black;
+            }
+/* try incorporating later ?*/
+          /* #tooltip{
+            position: absolute;
+            width: 70px;
+            height: 30px;
+            padding: 2px;
+            text-align: center;
+            font-family:sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            background: gold;
+            border-radius: 8px;
+            } */
+
+        </style>
+    </head>
+    <body>
+
+      <h1>Turning the Tables on the Beatles</h1>
+      <p>Click on the black center circle of each record to reveal how many songs each evaluator placed in each category, from "Classic" to a simple "No." Doubleclick the black circle to reset the record.</p>
+      <hr>
+      <!-- will save key exploration for another time -->
+        <!-- <svg width="800" height="400" id="svgKey"></svg> -->
+        <svg width="400" height="400" id="svgL0"></svg>
+        <svg width="400" height="400" id="svgS0"></svg>
+      <hr>
+        <svg width="400" height="400" id="svgL1"></svg>
+        <svg width="400" height="400" id="svgS1"></svg>
+        <!-- add more for other albums svgL1, svgS1, svgL2.... -->
+      <hr>
+
+        <script type="text/javascript">
+
+// bring in csv for all of Help!
+
+d3.csv("Beatles_SnL_Help_categorized_101820.csv").then(dataset =>{
+            // const svgKey = d3.select("#svgKey")
+            const svgL0 = d3.select("#svgL0");
+            const svgS0 = d3.select("#svgS0");
+            const width = 400;
+
+            const maxData = 6;
+            const minData = 0;
+            const myColor = d3.scaleSequential()
+                .domain([minData, maxData])
+                .interpolator(d3.interpolate("black","darkgray"));
+
+            const tooltip =d3.select("body")
+                .data(dataset)
+                .enter()
+                .append("div")
+                .attr("id", "tooltip")
+                .style("opacity", 0);
+
+// console.log(dataset);
+
+// set the outer radius just within the svg
+            const outerRadius = (width/2) -20;
+            const innerRadius = 70;
+
+            //d3.arc()creates wedges
+            const arcs = d3.arc()
+                 .innerRadius(innerRadius)
+                 .outerRadius(outerRadius);
+
+            const L0title = svgL0.append("text")
+                  .attr("class", "charttitle")
+                  .attr("x", 0)
+                  .attr("y", 30)
+                  .text("Lisa:");
+
+            const L0start = svgL0.append("circle")
+                  .attr("cx", width/2)
+                  .attr("cy", width/2)
+                  .attr("r", outerRadius)
+                  .attr("stroke", "black")
+                  .attr("stroke-width", "6px")
+                  .attr("fill", "gold");
+
+            //pie generator
+            const L0pie = d3.pie().value(d =>d.Lisa).sort(null);
+
+// transform translate for arcs
+            const L0groups = svgL0.selectAll("g.arc")
+                  .data(L0pie(dataset))
+                  .enter()
+                  .append("g")
+                  .attr("class", "arc")
+                  .attr("transform", "translate(" + width/2 + "," + width/2 + ")")
+                  ;
+
+            L0groups.append("path")
+                 .attr("fill", (d,i)=> myColor(i))
+                 .attr("stroke", "black")
+                 .attr("visibility","hidden")
+                 .attr("d", arcs)
+                 .attr("id", "L0path")
+                 ;
+
+            // Labels - try shifting placement of these
+
+            L0groups.append("text")
+                  .attr("transform", d=> "translate(" + arcs.centroid(d) + ")")
+                  // .attr("transform", "translate(" + arcs.centroid((startAngle + endAngle)/2,(innerRadius + outerRadius)/2) + ")")
+                  .attr("text-anchor", "middle")
+                  .attr("class", "labels")
+                  .attr("id","L0label")
+                  .style("visibility","hidden")
+                  .data(dataset)
+                  .text(d=> d.Rating + ": " + d.Lisa);
+
+
+            const L0center = svgL0.append("circle")
+                  .attr("cx", width/2)
+                  .attr("cy", width/2)
+                  .attr("r", 7)
+                  .attr("fill", "black")
+
+                  .on("click", (event, d)=> {
+                    d3.selectAll("path#L0path")
+                      .transition()
+                      .duration(2000)
+                      .ease(d3.easeLinear)
+                      .style("visibility", "visible");
+
+                    d3.selectAll("text#L0label")
+                        .transition()
+                        .duration(2000)
+                        .ease(d3.easeLinear)
+                        .style("visibility", "visible");
+                    })
+              .on("dblclick", (event, d)=>{
+                d3.selectAll("path#L0path")
+                  .transition()
+                  .duration(2000)
+                  .ease(d3.easeLinear)
+                  .style("visibility", "hidden");
+                  d3.selectAll("text#L0label")
+                      .transition()
+                      .duration(2000)
+                      .ease(d3.easeLinear)
+                      .style("visibility", "hidden");
+                });
+
+            const L0Label = svgL0.append("text")
+                  .data(dataset)
+                  .text(d=>d.Album)
+                  .attr("x", width/2)
+                  .attr("y", width/2 - (innerRadius/3))
+                  .attr("text-anchor", "middle")
+                  .attr("class", "albumLabel");
+
+
+            const L0year = svgL0.append("text")
+                  .data(dataset)
+                  .text(d=>d.Year)
+                  .attr("x", width/2)
+                  .attr("y", width/2 + (innerRadius/2))
+                  .attr("text-anchor", "middle")
+                  .attr("class", "albumLabel");
+
+
+// Steven's Help! ---------------------------------------------------
+
+            const S0title = svgS0.append("text")
+                  .attr("class", "charttitle")
+                  .attr("x", 0)
+                  .attr("y", 30)
+                  .text("Steven:");
+
+            const S0start = svgS0.append("circle")
+                  .attr("cx", width/2)
+                  .attr("cy", width/2)
+                  .attr("r", outerRadius)
+                  .attr("stroke", "black")
+                  .attr("stroke-width", "6px")
+                  .attr("fill", "gold");
+
+                              //pie generator
+            const S0pie = d3.pie().value(d =>d.Steven).sort(null);
+
+            const S0groups = svgS0.selectAll("g.arc")
+                  .data(S0pie(dataset))
+                  .enter()
+                  .append("g")
+                  .attr("class", "arc")
+                  .attr("transform", "translate(" + width/2 + "," + width/2 + ")");
+
+            S0groups.append("path")
+                  .attr("fill", (d,i)=> myColor(i))
+                  .attr("stroke", "black")
+                  .attr("visibility","hidden")
+                  .attr("d", arcs)
+                  .attr("id", "S0path")
+                          ;
+
+            S0groups.append("text")
+                  .attr("transform", d=> "translate(" + arcs.centroid(d) + ")")
+                  .attr("text-anchor", "middle")
+                  .attr("class", "labels")
+                  .attr("id","S0label")
+                  .style("visibility","hidden")
+                  .data(dataset)
+                  .text(d=> d.Rating + ": " + d.Steven);
+
+            const S0center = svgS0.append("circle")
+                  .attr("cx", width/2)
+                  .attr("cy", width/2)
+                  .attr("r", 7)
+                  .attr("fill", "black")
+                  .on("click", (event, d)=> {
+                          d3.selectAll("path#S0path")
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .style("visibility", "visible");
+                          d3.selectAll("text#S0label")
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .style("visibility", "visible");
+                            })
+                    .on("dblclick", (event, d)=>{
+                          d3.selectAll("path#S0path")
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .style("visibility", "hidden");
+                          d3.selectAll("text#S0label")
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .style("visibility", "hidden");
+                            });
+
+              const S0Label = svgS0.append("text")
+                          .data(dataset)
+                          .text(d=>d.Album)
+                          .attr("x", width/2)
+                          .attr("y", width/2 - (innerRadius/3))
+                          .attr("text-anchor", "middle")
+                          .attr("class", "albumLabel");
+
+              const S0year = svgS0.append("text")
+                          .data(dataset)
+                          .text(d=>d.Year)
+                          .attr("x", width/2)
+                          .attr("y", width/2 + (innerRadius/2))
+                          .attr("text-anchor", "middle")
+                          .attr("class", "albumLabel");
+
+})
+// end of Help! csv
+// beginning of Revolver
+
+d3.csv("Beatles_SnL_Revolver_categorized_101820.csv").then(dataset =>{
+            // const svgKey = d3.select("#svgKey")
+            const svgL1 = d3.select("#svgL1");
+            const svgS1 = d3.select("#svgS1");
+            const width = 400;
+
+            const maxData = 6;
+            const minData = 0;
+            const myColor = d3.scaleSequential()
+                .domain([minData, maxData])
+                .interpolator(d3.interpolate("black","darkgray"));
+
+            const tooltip =d3.select("body")
+                .data(dataset)
+                .enter()
+                .append("div")
+                .attr("id", "tooltip")
+                .style("opacity", 0);
+
+// console.log(dataset);
+
+// set the outer radius just within the svg
+            const outerRadius = (width/2) -20;
+            const innerRadius = 70;
+
+            //d3.arc()creates wedges
+            const arcs = d3.arc()
+                 .innerRadius(innerRadius)
+                 .outerRadius(outerRadius);
+
+            const L1title = svgL1.append("text")
+                  .attr("class", "charttitle")
+                  .attr("x", 0)
+                  .attr("y", 30)
+                  .text("Lisa:");
+
+            const L1start = svgL1.append("circle")
+                  .attr("cx", width/2)
+                  .attr("cy", width/2)
+                  .attr("r", outerRadius)
+                  .attr("stroke", "black")
+                  .attr("stroke-width", "6px")
+                  .attr("fill", "gold");
+
+            //pie generator
+            const L1pie = d3.pie().value(d =>d.Lisa).sort(null);
+
+// transform translate for arcs
+            const L1groups = svgL1.selectAll("g.arc")
+                  .data(L1pie(dataset))
+                  .enter()
+                  .append("g")
+                  .attr("class", "arc")
+                  .attr("transform", "translate(" + width/2 + "," + width/2 + ")")
+                  ;
+
+            L1groups.append("path")
+                 .attr("fill", (d,i)=> myColor(i))
+                 .attr("stroke", "black")
+                 .attr("visibility","hidden")
+                 .attr("d", arcs)
+                 .attr("id", "L1path")
+                 ;
+
+            // Labels - try shifting placement of these
+
+            L1groups.append("text")
+                  .attr("transform", d=> "translate(" + arcs.centroid(d) + ")")
+                  // .attr("transform", "translate(" + arcs.centroid((startAngle + endAngle)/2,(innerRadius + outerRadius)/2) + ")")
+                  .attr("text-anchor", "middle")
+                  .attr("class", "labels")
+                  .attr("id","L1label")
+                  .style("visibility","hidden")
+                  .data(dataset)
+                  .text(d=> d.Rating + ": " + d.Lisa);
+
+
+            const L1center = svgL1.append("circle")
+                  .attr("cx", width/2)
+                  .attr("cy", width/2)
+                  .attr("r", 7)
+                  .attr("fill", "black")
+
+                  .on("click", (event, d)=> {
+                    d3.selectAll("path#L1path")
+                      .transition()
+                      .duration(2000)
+                      .ease(d3.easeLinear)
+                      .style("visibility", "visible");
+
+                    d3.selectAll("text#L1label")
+                        .transition()
+                        .duration(2000)
+                        .ease(d3.easeLinear)
+                        .style("visibility", "visible");
+                    })
+              .on("dblclick", (event, d)=>{
+                d3.selectAll("path#L1path")
+                  .transition()
+                  .duration(2000)
+                  .ease(d3.easeLinear)
+                  .style("visibility", "hidden");
+                  d3.selectAll("text#L1label")
+                      .transition()
+                      .duration(2000)
+                      .ease(d3.easeLinear)
+                      .style("visibility", "hidden");
+                });
+
+            const L1Label = svgL1.append("text")
+                  .data(dataset)
+                  .text(d=>d.Album)
+                  .attr("x", width/2)
+                  .attr("y", width/2 - (innerRadius/3))
+                  .attr("text-anchor", "middle")
+                  .attr("class", "albumLabel");
+
+
+            const L1year = svgL1.append("text")
+                  .data(dataset)
+                  .text(d=>d.Year)
+                  .attr("x", width/2)
+                  .attr("y", width/2 + (innerRadius/2))
+                  .attr("text-anchor", "middle")
+                  .attr("class", "albumLabel");
+
+
+// Steven's Help! ---------------------------------------------------
+
+            const S1title = svgS1.append("text")
+                  .attr("class", "charttitle")
+                  .attr("x", 0)
+                  .attr("y", 30)
+                  .text("Steven:");
+
+            const S1start = svgS1.append("circle")
+                  .attr("cx", width/2)
+                  .attr("cy", width/2)
+                  .attr("r", outerRadius)
+                  .attr("stroke", "black")
+                  .attr("stroke-width", "6px")
+                  .attr("fill", "gold");
+
+                              //pie generator
+            const S1pie = d3.pie().value(d =>d.Steven).sort(null);
+
+            const S1groups = svgS1.selectAll("g.arc")
+                  .data(S1pie(dataset))
+                  .enter()
+                  .append("g")
+                  .attr("class", "arc")
+                  .attr("transform", "translate(" + width/2 + "," + width/2 + ")");
+
+            S1groups.append("path")
+                  .attr("fill", (d,i)=> myColor(i))
+                  .attr("stroke", "black")
+                  .attr("visibility","hidden")
+                  .attr("d", arcs)
+                  .attr("id", "S1path")
+                          ;
+
+            S1groups.append("text")
+                  .attr("transform", d=> "translate(" + arcs.centroid(d) + ")")
+                  .attr("text-anchor", "middle")
+                  .attr("class", "labels")
+                  .attr("id","S1label")
+                  .style("visibility","hidden")
+                  .data(dataset)
+                  .text(d=> d.Rating + ": " + d.Steven);
+
+            const S1center = svgS1.append("circle")
+                  .attr("cx", width/2)
+                  .attr("cy", width/2)
+                  .attr("r", 7)
+                  .attr("fill", "black")
+                  .on("click", (event, d)=> {
+                          d3.selectAll("path#S1path")
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .style("visibility", "visible");
+                          d3.selectAll("text#S1label")
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .style("visibility", "visible");
+                            })
+                    .on("dblclick", (event, d)=>{
+                          d3.selectAll("path#S0path")
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .style("visibility", "hidden");
+                          d3.selectAll("text#S1label")
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .style("visibility", "hidden");
+                            });
+
+              const S1Label = svgS1.append("text")
+                          .data(dataset)
+                          .text(d=>d.Album)
+                          .attr("x", width/2)
+                          .attr("y", width/2 - (innerRadius/3))
+                          .attr("text-anchor", "middle")
+                          .attr("class", "albumLabel");
+
+              const S1year = svgS1.append("text")
+                          .data(dataset)
+                          .text(d=>d.Year)
+                          .attr("x", width/2)
+                          .attr("y", width/2 + (innerRadius/2))
+                          .attr("text-anchor", "middle")
+                          .attr("class", "albumLabel");
+
+})
+
+
+
+
+
+        </script>
+    </body>
+</html>
