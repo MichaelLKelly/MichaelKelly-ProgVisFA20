@@ -2,13 +2,14 @@ Week 8 Homework
 ======================
 Comparing Doughnut Charts 
 ------------------------
-For this week's interactive visualization, I tried another look at the Beatles rankings I have been working with for a few of the week. This project takes a new csv (for each album) and breaks each evaluator's rankings down into 'songs per category,' ranging from "Classic" to "No." Adding interactivity to the mix, each set of wedges is only revealed when one clicks on the black circle at the center of the album. Doubleclicking then resets the album.
+For this week's interactive visualization, I tried another look at the Beatles rankings I have been working with for a few of the other weeks. This project takes a new csv (for each album) and breaks each evaluator's rankings down into 'songs per category,' ranging from "Classic" to simply "No." Adding interactivity to the mix, each set of wedges is only revealed when one clicks on the black circle at the center of the album. Doubleclicking then resets the album, removing the wedges.
 
-There are a couple of unresolved issues. The first is that color of the labels coudl read more easily. For now, gold remained the best option. The other is that I was unable to resolve the display of categories with a value of 0, which lead to some random labels in unfortunate places.
+There are a couple of unresolved issues. The first is that color of the labels could read more easily. For now, gold remained the best option. The other is that I was unable to resolve the display of categories with a value of 0, which lead to some random labels in unfortunate places. This will require further investigation.
 
+------------------------
 Below are representative screenshots of the interaction's progression.
 
-1. The default view shows the empty circles.
+1. The default view shows the empty circles and instructions.
 ![Wk8_Screenshot_1_MKelly.png](/WK8-Projects/Wk8_Screenshot_1_MKelly.png "MKelly_Beatles_Screenshot1")
 
 2. A single click on the center circle of each album reveals its rankings.
@@ -18,4 +19,4 @@ Below are representative screenshots of the interaction's progression.
 ![Wk8_Screenshot_5_MKelly.png](/WK8-Projects/Wk8_Screenshot_5_MKelly.png "MKelly_Beatles_Screenshot5")
 
 3. Doubleclicking the center resets a circle.
-![Wk8_Screenshot_6_MKelly.png](/WK8-Projects/Wk8_Screenshot_5_MKelly.png "MKelly_Beatles_Screenshot6")
+![Wk8_Screenshot_6_MKelly.png](/WK8-Projects/Wk8_Screenshot_6_MKelly.png "MKelly_Beatles_Screenshot6")
