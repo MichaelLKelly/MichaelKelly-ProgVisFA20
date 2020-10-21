@@ -2,7 +2,7 @@ Week 8 Homework
 ======================
 Comparing Doughnut Charts 
 ------------------------
-For this week's interactive visualization, I tried another look at the Beatles rankings I have been working with for a few of the week. Thsi project takes a new csv (for each album) and breaks each evaluator's rankings down into 'songs per category,' ranging from "Classic" to "No." Adding interactivity to the mix, each set of wedges is only revealed when one clicks on the black circle at the center of the album. Doubleclicking then resets the album.
+For this week's interactive visualization, I tried another look at the Beatles rankings I have been working with for a few of the week. This project takes a new csv (for each album) and breaks each evaluator's rankings down into 'songs per category,' ranging from "Classic" to "No." Adding interactivity to the mix, each set of wedges is only revealed when one clicks on the black circle at the center of the album. Doubleclicking then resets the album.
 
 Below are representative screenshots of the interaction's progression.
 
