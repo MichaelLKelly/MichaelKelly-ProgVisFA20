@@ -5,11 +5,7 @@ An Alternate SCOTUS Portrait
 This project builds on and dynamically presents research undertaken in a concurrent Data Analysis course, which explored the effects of a theoretical 18-year term limit imposed on the U.S. Supreme Court in 1971. That project consisted of hand-generated tables that were color-coded as ‘Actual’ and ‘Alternate’ heatmaps to show the ideology of the Court over the 50 years from then until the sitting Court. Select cases (one for each decade) were then examined to explore how an Alternate Court’s composition might have changed or affected the ruling. This project took the story told by that research and its accompanying report and translated it into an interactive bit of storytelling, utilizing d3, html, css and javascript. All code and CSV files are included here, along with a PDF of the accompanying Data Analysis project's research report for further context.
 
 ------------------------
-The screenshots below document the structure and interactive features of the project, but one can also view a [GitHub](http://github.com)
-
-
-
-[working GitHub Page](https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
+The screenshots below document the structure and interactive features of the project, but one can also view a [working GitHub Page](https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
 
 
 <h2>1. Introduction</h2>
@@ -23,7 +19,9 @@ Each case study contains an Actual and Alternate heatmap, showing the decade bro
 ![SCOTUS_Final_Structure.png](/Final_Project/SCOTUS_Final_Structure.png "SCOTUS Structure")
 
 <h2>3. A Case Study in Detail</h2>
-The case study shown for the next few screenshots is example is Citizens United v. FEC, which showcases all changes that may result from interactivity within a particular case study.) To view all cases, one can visit the [working GitHub Page](https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
+The case study shown for the next few screenshots is example is Citizens United v. FEC, which showcases all changes that may result from interactivity within a particular case study.) To view all cases, one can visit the [GitHub](http://github.com).
+
+[working GitHub Page](https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
 
 
 ![SCOTUS_Final_CUvFEC_actu.png](/Final_Project/SCOTUS_Final_CUvFEC_actu.png "SCOTUS Case Study: Actual")
