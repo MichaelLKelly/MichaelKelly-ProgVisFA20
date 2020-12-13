@@ -13,6 +13,7 @@ The screenshots below document the structure and interactive features of the pro
 
 
 1. Introduction
+
 Even the opening illustration utilizes d3, to create an homage to Justice Ruth Bader Ginsburg’s trademark collars as a half-doughnut chart, featuring nine arcs.
 
 
