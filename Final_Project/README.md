@@ -37,5 +37,5 @@ Likewise, the mouseover now reflects the ideological scores of the Alternate Jus
 As the visualization has evolved into a kind of scrollytelling, it ends with a brief conclusion, reflecting on the takeaways from the examination of case studies.
 
 
-![Wk8_Screenshot_1_MKelly.png](/WK8-Projects/Wk8_Screenshot_1_MKelly.png "MKelly_Beatles_Screenshot1")
+![SCOTUS_Final_Conclusion.png](/Final_Project/SCOTUS_Final_Conclusion.png "SCOTUS Conclusion")
 
