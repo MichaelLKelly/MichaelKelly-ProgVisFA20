@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+
 <html lang="en">
 
 <head>
@@ -7,14 +8,11 @@
   <title>SCOTUS Alternate Portrait</title>
   <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
   <style type="text/css">
+
     body {
-      /* background: ivory; */
-      /* box-shadow: 0px 0px 8px cornsilk; */
       background-image: linear-gradient(170deg, cornsilk, ivory);
       width: 940px;
       margin: auto;
-      /* margin-left: 30px;
-      margin-right: 30px; */
     }
 
     h1 {
@@ -28,6 +26,7 @@
       text-transform: uppercase;
       text-align: center;
       color: ivory;
+      margin: 40px 0px 0px 0px;
     }
 
     h2 {
@@ -50,7 +49,6 @@
       margin-top: 6px;
     }
 
-
     /* intro and key */
     .introdiv {
       display: flex;
@@ -58,22 +56,26 @@
     }
 
     .introtextdiv {
-      padding: 0px 80px 0px 80px;
+      padding: 0px 70px 0px 70px;
     }
 
-    .keydiv {
+    .titlediv {
       background-image: linear-gradient(90deg, cornflowerblue, crimson);
       margin-top: 20px;
       padding: 0px 0px 20px 0px;
     }
 
     .intro {
-      font-size: 21px;
+      font-size: 20px;
       color: ivory;
       line-height: 1.5em;
       text-align: center;
       padding: 0px 80px 0px 80px;
     }
+
+    .intro a{
+      color: ivory;
+        }
 
     .directions {
       font-size: 17px;
@@ -103,7 +105,6 @@
     /* PD */
     .Dcontainer {
       display: flex;
-      /* height: 650px; */
     }
 
     .PDContainer {
@@ -115,13 +116,11 @@
     .headContainer {
       width: 520px;
       text-align: center;
-      /* padding: 10px 20px 0px 20px; */
     }
 
     .timeheaderDiv {
       text-align: center;
       width: 210px;
-      /* height: 20px; */
     }
 
     .actuDiv {
@@ -141,15 +140,14 @@
       opacity: 0.3;
     }
 
-    .JustArc {
+    /* .JustArc { */
       /* opacity: 0.75; */
-    }
+    /* } */
 
     .PiLabels {
       font-size: 13px;
       font-weight: bold;
       font-family: sans-serif;
-      /* text-shadow: 0px 0px black; */
       fill: darkslateblue;
     }
 
@@ -169,7 +167,6 @@
 
     .description {
       font-size: 24px;
-      /* font-weight: bold; */
       font-family: sans-serif;
       fill: darkslateblue;
     }
@@ -214,18 +211,15 @@
 </head>
 
 <body>
-  <div class="keydiv">
+  <div class="titlediv">
     <svg width="940" height="270" id="RBGkey"><svg>
         <p class="vizTitle">An Alternate SCOTUS Portrait</p>
-        <p class="intro">With the passing of Justice Ruth Bader Ginsburg in September of 2020, the question of Supreme Court term limits once more entered our broader national discussion. This visualization looks back over the past 50 years to
-          explore the presumed effect of the proposed 18-year term limit on U.S. Supreme Court justices (link). While the focus of such proposals have generally looked to the future of the Court, this takes a look back to consider how much would
-          really change. This 'alternate history' is primarily intended as an exploration of perception, and aims to change as little as posisble about the conditions under which decisions were made, other than Court composition. A full explanation
-          of the reasoning and methodology can be found here (link to report)</p>
+        <p class="intro">With the passing of Justice Ruth Bader Ginsburg in September of 2020, the question of U.S. Supreme Court term limits once more entered our broader national discussion, with a bill implementing 18-year term limits currently proposed in the House of Representatives. While the discussion of such legislation generally looks to the future of the Court, this visualization looks back over the past 50 years to explore the presumed effect of such a limit on Court composition and select decisions during that time. This 'Alternate history' was primarily intended as an exploration of perception, and aims to change as little as possible about the conditions under which decisions were made. In the end, it sheds light on how perceptions today may not align with the reality of yesterday. A full explanation of the reasoning and methodology can be found in <a href = "INFO_640_01_Kelly_Project_Part_III.pdf" download="SCOTUS_Research_Report_Kelly">this report</a> that covers the data analysis side of this project.</p>
   </div>
   <hr>
 
   <div class="introtextdiv">
-    <p class="directions">Heatmaps on either side show the Court composition by month over the 50 years, with individual Justice's color-coded blue (Liberal) to consservative (Red) by their <a href = "https://mqscores.lsa.umich.edu/index.php" target="_blank">Martin-Quinn ideological score</a>. The pie and doughnut charts below can be toggled to show Actual and Alternate justices for the term that select decisions were handed down. Brackets denote unnamed replacement judges, labeled with the President who would have appointed them and that President's total number of appointments at that time. Hovering over any part of the doughnut chart will display the Justices' Martin-Quinn scores.</p>
+    <p class="directions">Heatmaps on either side show the Court composition by month over the 50 years, with individual Justice's color-coded blue (Liberal) to red (Conservative) by their <a href = "https://mqscores.lsa.umich.edu/index.php" target="_blank">Martin-Quinn ideological score</a>. The pie and doughnut charts below can be toggled to show Actual and Alternate Justices for the term that select decisions were handed down. Brackets denote unnamed replacement Justices, labeled with the President who would have appointed them and that President's total number of appointments at that time. Hovering over any part of the doughnut chart will also display the Justices' ideological color-coding.</p>
   </div>
   <hr>
 
@@ -314,7 +308,7 @@
   <!-- 2000 Pie / Doughnut -->
     <div class="PDContainer">
       <h2>Bush v. Gore : December 12, 2000</h2>
-      <p class="caseDesc">While the Court solidly (7-2) ruled Florida's disparate recount methods in the 2000 presidential election unconstitutional, it is the 5-4 majority that halted the recount  that is most noted in popular memory. Yet again, Kennedy is the deciding vote. In the Alternate timeline: David Souter takes his place; that vote is presumably 5-4 on the Liberal side; some form of recount proceeds; and Al Gore still stands a chance of being the 43rd President (though the likelhood of that result is itself debated).</p>
+      <p class="caseDesc">While the Court solidly (7-2) ruled Florida's disparate recount methods in the 2000 presidential election unconstitutional, it is the 5-4 majority that halted the recount  that is most noted in popular memory. Yet again, Kennedy is the deciding vote. In the Alternate timeline: David Souter takes his place; that vote is presumably 5-4 on the Liberal side; some form of recount proceeds; and Al Gore still stands a chance of being the 43rd President (though the likelihood of that result is itself debated).</p>
       <hr>
       <div id="togcontainer">
         <label class="historytoggle">Actual
@@ -374,8 +368,7 @@
   <!-- 1980 Pie / Doughnut -->
     <div class="PDContainer">
       <h2>Roe v. Wade : January 22, 1973</h2>
-      <p class="caseDesc">One of the most famous and contentious cases in Court history, the polarizing nature of the topic is belied by the Actual 7-2 decision in favor of ‘Jane Roe’ and protection of abortion rights. The Court’s composition in the Alternate timeline remains exactly the same — and remarkably similar to the Court’s composition today. Yet if we apply the kind of Liberal-Conservative central line that we presume with today’s Court, abortion rights are likely not protected to the same degree.
-      </p>
+      <p class="caseDesc">One of the most famous and contentious cases in Court history, the polarizing nature of the topic is belied by the Actual 7-2 decision in favor of ‘Jane Roe’ and protection of abortion rights. The Court’s composition in the Alternate timeline remains exactly the same — and remarkably similar to the Court’s composition today. Yet if we apply the kind of Liberal-Conservative central line that we presume with today’s Court, abortion rights are likely not protected to the same degree.</p>
       <hr>
       <div id="togcontainer">
         <label class="historytoggle">Actual
@@ -396,8 +389,15 @@
   </div>
   <hr>
 
+  <div class="titlediv">
+        <p class="intro" style="padding: 40px 80px 0px 80px">If we look to the past to interpret the present and consider our future, then what does the application (and presumptions) of the ideologies in this Alternate timeline say about a nation’s views (founded or unfounded) on the composition of the Court today? Is it telling to look at the headlines that fear an overturning or crippling of Roe v. Wade by a Court that resembles one that voted 7-2 in favor of ‘Jane Roe?’ Has the polarization that has infected other branches of the U.S. government officially infected the most impartial — or at the very least, its citizens’ perceptions of it? While this may not ‘prove’ the need for term limits, it certainly presents a strong case. If the Judiciary, like the Legislative and Executive, is viewed as an ideological body, then perhaps similar temporal limits are not such a bad idea.</p>
+  </div>
+
+
+
+
   <!-- Credit -->
-  <p class = "credit">Copyright 2020 Michael L Kelly : Information on Court decisions as described in the Case Studies was researched using <a href = "https://www.oyez.org/" target ="_blank">oyez.org</a> and much of the text was adapted from my own research report that utilized that site.</p>
+  <p class = "credit">Copyright 2020 Michael L Kelly : Information on Court decisions as described in the Case Studies was researched using <a href = "https://www.oyez.org/" target ="_blank">oyez.org</a> and much of the text was adapted from my own research report that utilized that site, which is available for download via the link in the introduction.</p>
 
   <!-- End of divs and svgs -->
 
@@ -511,7 +511,7 @@
     }
 
 
-// -------------------- Data Creation ----------------------------------//
+// -------------------- Data / Viz Creation ----------------------------------//
 
     //------------------------- RBG Collar Illustration ---------------------------//
     const RBGdataset = [10, 10, 10, 10, 10, 10, 10, 10, 10];
@@ -746,7 +746,6 @@
         .attr("height", h / 120)
         .attr("class", "highlight")
         .attr("opacity", 0.5)
-        .attr("visibility", "visible")
         .attr("id", "actu2020high");
       // highlight row in alternate heatmap so it can be selected later
       svgAlt2020.append("rect")
@@ -755,17 +754,16 @@
         .attr("width", w)
         .attr("height", h / 120)
         .attr("class", "highlight")
-        .attr("opacity", 0.5)
-        .attr("visibility", "hidden")
+        .attr("opacity", 0.0)
         .attr("id", "alt2020high");
         // toggling
       d3.selectAll("input[value='actu2020']")
         .on("change", (event, d) => {
         // show and hide highlights
           d3.selectAll("#actu2020high")
-            .attr("visibility", "visible");
+            .attr("opacity", 0.5);
           d3.selectAll("#alt2020high")
-            .attr("visibility", "hidden");
+            .attr("opacity", 0.0);
         // mouseover to reveal Justice ideologies
           d3.selectAll("#Do2020path")
             .attr("fill", (d => DMColor(+d.voteVal)))
@@ -791,9 +789,9 @@
         .on("change", (event, d) => {
           // switches highlights
           d3.selectAll("#alt2020high")
-            .attr("visibility", "visible");
+            .attr("opacity", 0.5);
           d3.selectAll("#actu2020high")
-            .attr("visibility", "hidden");
+            .attr("opacity", 0.0);
         // mouseover to show alt ideologies
           d3.selectAll("#Do2020path")
             .attr("fill", (d => DMColor(+d.altVoteVal)))
@@ -1058,7 +1056,6 @@
 
       d3.selectAll("input[value='alt2010']")
         .on("change", (event, d) => {
-
           // highlight row in heatmap
           d3.selectAll("#alt2010high")
             .attr("opacity", 0.5);
@@ -1097,8 +1094,8 @@
             .text("Corporate Funding Can Be Limited")
             .call(wrap, 180);
         });
+      })
       // end of PD2010 csv
-    })
 
 
     // ---------------------- 2000 CONTENT ----------------------//
@@ -1139,10 +1136,8 @@
         .attr("text-anchor", "end")
         .attr("transform", "rotate(-90)")
         .text((d, i) => d);
-
-
+      })
       // end of Actu2000 csv
-    })
 
     // 2000 Alt Heatmap Content
     d3.csv("DASC_18yr_alt_sorted_2000.csv").then(dataset => {
@@ -1180,18 +1175,17 @@
         .attr("text-anchor", "beginning")
         .attr("transform", "rotate(90)")
         .text((d, i) => d);
-
-      // end of Alt2000 csv
-    })
+      })
+    // end of Alt2000 csv
 
     // 2000 Pie / Doughnut Content and actions
     d3.csv("bushVgore_dataset.csv").then(dataset => {
-      // Pie
-      //d3.arc()creates wedges for DM Pie
+      // PIE
+      //create wedges
       const Pi2000arcs = d3.arc()
         .innerRadius(DMinnerRadius)
         .outerRadius(DMouterRadius);
-      //generate pie or doughnut
+      //generate pie
       const Pi2000 = d3.pie().value(d => d.pievalue).sort(null);
       //transform translate for arcs
       const Pi2000groups = svgPD2000.selectAll("g.Pi2000arc")
@@ -1204,7 +1198,6 @@
         .attr("d", Pi2000arcs)
         .data(dataset)
         .attr("fill", (d => DMColor(+d.voteVal)))
-        // .style("opacity", 0.15)
         .attr("class", "DMarc")
         .attr("id", "Pi2000path");
 
@@ -1241,10 +1234,8 @@
             .attr("fill", (d => DMColor(+d.voteVal)));
         });
       // PD2000 Labels and such
-      // Take another look at centroid labels
       Do2000groups.append("text")
         .attr("transform", d => "translate(" + Do2000arcs.centroid(d) + ")")
-        // .attr("transform", "translate(" + arcs.centroid((startAngle + endAngle)/2,(innerRadius + outerRadius)/2) + ")")
         .attr("text-anchor", "middle")
         .attr("class", "PiLabels")
         .attr("id", "Do2000label")
@@ -1287,13 +1278,10 @@
       svgActu2000.append("rect")
         .attr("x", 0)
         .attr("y", 0)
-        // .attr("y", 67 * (h / 120))
-        // .attr("y", 5 * (altYScale.bandwidth()))
         .attr("width", w)
         .attr("height", h / 120)
         .attr("class", "highlight")
         .attr("opacity", 0.5)
-        // .attr("visibility", "hidden")
         .attr("id", "actu2000high");
 
       svgAlt2000.append("rect")
@@ -1303,7 +1291,6 @@
         .attr("height", h / 120)
         .attr("class", "highlight")
         .attr("opacity", 0.0)
-        // .attr("visibility", "hidden")
         .attr("id", "alt2000high");
 
 
@@ -1350,7 +1337,6 @@
 
       d3.selectAll("input[value='alt2000']")
         .on("change", (event, d) => {
-
           // highlight row in heatmap
           d3.selectAll("#alt2000high")
             .attr("opacity", 0.5);
@@ -1389,10 +1375,11 @@
             .text("Florida Recount Proceeds")
             .call(wrap, 180);
         });
-      // end of PD2000 csv
     })
+    // end of PD2000 csv
 
-    // -------------------------------------- 1990 CONTENT
+
+    // ------------------------------- 1990 CONTENT
 
     // 1990 Actu Heatmap Content
     d3.csv("DASC_18yr_actu_sorted_1990.csv").then(dataset => {
@@ -1430,11 +1417,8 @@
         .attr("text-anchor", "end")
         .attr("transform", "rotate(-90)")
         .text((d, i) => d);
-
-      // end of Actu1990 csv
     })
-
-
+      // end of Actu1990 csv
 
     // 1990 Alt Heatmap Content
     d3.csv("DASC_18yr_alt_sorted_1990.csv").then(dataset => {
@@ -1472,19 +1456,17 @@
         .attr("text-anchor", "beginning")
         .attr("transform", "rotate(90)")
         .text((d, i) => d);
-
-
-      // end of Alt1990 csv
     })
+      // end of Alt1990 csv
 
     // 1990 Pie / Doughnut Content and actions
     d3.csv("texasVjohnson_dataset.csv").then(dataset => {
-      // Pie
-      //d3.arc()creates wedges for DM Pie
+      // PIE
+      //create wedges
       const Pi1990arcs = d3.arc()
         .innerRadius(DMinnerRadius)
         .outerRadius(DMouterRadius);
-      //generate pie or doughnut
+      //generate pie
       const Pi1990 = d3.pie().value(d => d.pievalue).sort(null);
       //transform translate for arcs
       const Pi1990groups = svgPD1990.selectAll("g.Pi1990arc")
@@ -1497,7 +1479,6 @@
         .attr("d", Pi1990arcs)
         .data(dataset)
         .attr("fill", (d => DMColor(+d.voteVal)))
-        // .style("opacity", 0.15)
         .attr("class", "DMarc")
         .attr("id", "Pi1990path");
 
@@ -1578,13 +1559,10 @@
       svgActu1990.append("rect")
         .attr("x", 0)
         .attr("y", 18 * (h / 120))
-        // .attr("y", 67 * (h / 120))
-        // .attr("y", 5 * (altYScale.bandwidth()))
         .attr("width", w)
         .attr("height", h / 120)
         .attr("class", "highlight")
         .attr("opacity", 0.5)
-        // .attr("visibility", "hidden")
         .attr("id", "actu1990high");
 
       svgAlt1990.append("rect")
@@ -1594,9 +1572,7 @@
         .attr("height", h / 120)
         .attr("class", "highlight")
         .attr("opacity", 0.0)
-        // .attr("visibility", "hidden")
         .attr("id", "alt1990high");
-
 
       d3.selectAll("input[value='actu1990']")
         .on("change", (event, d) => {
@@ -1680,8 +1656,9 @@
             .text("Flag Burning Protected")
             .call(wrap, 180);
         });
-      // end of PD1990 csv
     })
+    // end of PD1990 csv
+
 
 
     // ----------------------------- 1980 CONTENT
@@ -1722,9 +1699,9 @@
         .attr("text-anchor", "end")
         .attr("transform", "rotate(-90)")
         .text((d, i) => d);
-
-      // end of Actu1980 csv
     })
+    // end of Actu1980 csv
+
 
     // 1980 Alt Heatmap Content
     d3.csv("DASC_18yr_alt_sorted_1980.csv").then(dataset => {
@@ -1762,18 +1739,17 @@
         .attr("text-anchor", "beginning")
         .attr("transform", "rotate(90)")
         .text((d, i) => d);
-
-
+    })
       // end of Alt1980 csv
 
       // 1980 Pie / Doughnut Content and actions
       d3.csv("roeVwade_dataset.csv").then(dataset => {
-        // Pie
-        //d3.arc()creates wedges for DM Pie
+        // PIE
+        //create wedges
         const Pi1980arcs = d3.arc()
           .innerRadius(DMinnerRadius)
           .outerRadius(DMouterRadius);
-        //generate pie or doughnut
+        //generate pie
         const Pi1980 = d3.pie().value(d => d.pievalue).sort(null);
         //transform translate for arcs
         const Pi1980groups = svgPD1980.selectAll("g.Pi1980arc")
@@ -1786,7 +1762,6 @@
           .attr("d", Pi1980arcs)
           .data(dataset)
           .attr("fill", (d => DMColor(+d.voteVal)))
-          // .style("opacity", 0.15)
           .attr("class", "DMarc")
           .attr("id", "Pi1980path");
 
@@ -1826,7 +1801,6 @@
         // Take another look at centroid labels
         Do1980groups.append("text")
           .attr("transform", d => "translate(" + Do1980arcs.centroid(d) + ")")
-          // .attr("transform", "translate(" + arcs.centroid((startAngle + endAngle)/2,(innerRadius + outerRadius)/2) + ")")
           .attr("text-anchor", "middle")
           .attr("class", "PiLabels")
           .attr("id", "Do1980label")
@@ -1873,7 +1847,6 @@
           .attr("height", h / 120)
           .attr("class", "highlight")
           .attr("opacity", 0.5)
-          // .attr("visibility", "hidden")
           .attr("id", "actu1980high");
 
         svgAlt1980.append("rect")
@@ -1883,9 +1856,7 @@
           .attr("height", h / 120)
           .attr("class", "highlight")
           .attr("opacity", 0.0)
-          // .attr("visibility", "hidden")
           .attr("id", "alt1980high");
-
 
         d3.selectAll("input[value='actu1980']")
           .on("change", (event, d) => {
@@ -1924,14 +1895,13 @@
             d3.selectAll("#MD1980Decision")
               .text("7-2");
             d3.selectAll("#MD1980Description")
-              .text("Abortion Right Protected")
+              .text("Abortion Rights Protected")
               .call(wrap, 180);
           });
 
         d3.selectAll("input[value='alt1980']")
           .on("change", (event, d) => {
 
-            // highlight row in heatmap
             d3.selectAll("#alt1980high")
               .attr("opacity", 0.5);
 
@@ -1969,15 +1939,12 @@
               .text("Abortion Rights Not Protected")
               .call(wrap, 180);
           });
-        // end of PD1980 csv
       })
+    // end of PD1980 csv
 
-
-
-    })
+    // }) remnant, but since I noticed it late, keeping ot here as a reminder...
   </script>
 
 </body>
-
 
 </html>
