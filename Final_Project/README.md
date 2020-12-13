@@ -12,12 +12,12 @@ This project builds on and dynamically presents research undertaken in a concurr
 The screenshots below document the structure and interactive features of the project, but one can also view a [working GitHub Page](https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
 
 
-1. Introduction
+#1. Introduction
 
 Even the opening illustration utilizes d3, to create an homage to Justice Ruth Bader Ginsburg’s trademark collars as a half-doughnut chart, featuring nine arcs.
 
 
-2. Case Structure
+#2. Case Structure
 Each case study contains an Actual and Alternate heatmap, showing the decade broken up by month, with its nine Justices in an ideologically colored row from left to right. At the center is a combination pie / doughnut chart, with the pie showing the majority / dissent vote and the doughnut showing the individual Justices linked to that vote.
 
 (The case study shown for this example is Citizens United v. FEC, which showcases all changes that may result from interactivity within a particular case study.) To view all cases, one can visit the GitHub page.
