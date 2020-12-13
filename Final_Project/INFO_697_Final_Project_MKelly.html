@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>SCOTUS Alternate Portrait</title>
+  <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+  <style type="text/css">
+
+    body {
+      background-image: linear-gradient(170deg, cornsilk, ivory);
+      width: 940px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .vizTitle {
+      font-size: 36px;
+      font-family: Times, serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+      color: ivory;
+      margin: 40px 0px 0px 0px;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-family: sans-serif;
+      color: darkslateblue;
+      margin: 0px;
+      text-align: center;
+    }
+
+    hr {
+      border-top: 1px dotted darkslateblue;
+    }
+
+    .caseDesc {
+      font-size: 14pt;
+      font-family: Times, serif;
+      color: darkslateblue;
+      line-height: 1.2em;
+      margin-top: 6px;
+    }
+
+    /* intro and key */
+    .introdiv {
+      display: flex;
+      margin: 0px 10px 0px 10px;
+    }
+
+    .introtextdiv {
+      padding: 0px 70px 0px 70px;
+    }
+
+    .titlediv {
+      background-image: linear-gradient(90deg, cornflowerblue, crimson);
+      margin-top: 20px;
+      padding: 0px 0px 20px 0px;
+    }
+
+    .intro {
+      font-size: 20px;
+      color: ivory;
+      line-height: 1.5em;
+      text-align: center;
+      padding: 0px 80px 0px 80px;
+    }
+
+    .intro a{
+      color: ivory;
+        }
+
+    .directions {
+      font-size: 17px;
+      color: darkslateblue;
+      line-height: 1.2em;
+      text-align: center;
+      padding: 0px 40px 0px 40px;
+    }
+
+    .key {
+      background-image: linear-gradient(90deg, cornflowerblue, crimson);
+    }
+
+    .keylabels {
+      font-size: 14px;
+      font-family: "Helvetica", sans-serif;
+      fill: ivory;
+    }
+
+    .credit {
+      font-size: 14px;
+      color: darkslateblue;
+      text-align: center;
+      font-family: "Helvetica", sans-serif;
+    }
+
+    /* PD */
+    .Dcontainer {
+      display: flex;
+    }
+
+    .PDContainer {
+      width: 600px;
+      height: 360px;
+      padding: 10px 20px 0px 20px;
+    }
+
+    .headContainer {
+      width: 520px;
+      text-align: center;
+    }
+
+    .timeheaderDiv {
+      text-align: center;
+      width: 210px;
+    }
+
+    .actuDiv {
+      text-align: center;
+      width: 210px;
+      height: 650px;
+    }
+
+    .altDiv {
+      text-align: center;
+      width: 210px;
+      height: 650px;
+    }
+
+    /* Pies and doughnuts */
+    .DMarc {
+      opacity: 0.3;
+    }
+
+    /* .JustArc { */
+      /* opacity: 0.75; */
+    /* } */
+
+    .PiLabels {
+      font-size: 13px;
+      font-weight: bold;
+      font-family: sans-serif;
+      fill: darkslateblue;
+    }
+
+    .MDLabels {
+      font-family: "Helvetica", sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      fill: darkslateblue;
+    }
+
+    .decision {
+      font-size: 48px;
+      font-weight: bold;
+      font-family: sans-serif;
+      fill: darkslateblue;
+    }
+
+    .description {
+      font-size: 24px;
+      font-family: sans-serif;
+      fill: darkslateblue;
+    }
+
+    .historytoggle {
+      font-family: sans-serif;
+      color: darkslateblue;
+    }
+
+    /* for heatmaps */
+    .brick {
+      stroke: cornsilk;
+      stroke-width: .5px;
+    }
+
+    .heatHead {
+      text-align: center;
+      font-size: 12px;
+      font-family: "Helvetica", sans-serif;
+      color: darkslateblue;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .timeLabels {
+      font-family: "Helvetica", sans-serif;
+      font-size: 12px;
+      fill: darkslateblue;
+    }
+
+    .note {
+      font-family: "Helvetica", sans-serif;
+    }
+
+    .highlight {
+      fill: darkslateblue;
+      width: 210px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <div class="titlediv">
+    <svg width="940" height="270" id="RBGkey"><svg>
+        <p class="vizTitle">An Alternate SCOTUS Portrait</p>
+        <p class="intro">With the passing of Justice Ruth Bader Ginsburg in September of 2020, the question of U.S. Supreme Court term limits once more entered our broader national discussion, with a bill implementing 18-year term limits currently proposed in the House of Representatives. While the discussion of such legislation generally looks to the future of the Court, this visualization looks back over the past 50 years to explore the presumed effect of such a limit on Court composition and select decisions during that time. This 'Alternate history' was primarily intended as an exploration of perception, and aims to change as little as possible about the conditions under which decisions were made. In the end, it sheds light on how perceptions today may not align with the reality of yesterday. A full explanation of the reasoning and methodology can be found in <a href = "INFO_640_01_Kelly_Project_Part_III.pdf" download="SCOTUS_Research_Report_Kelly">this report</a> that covers the data analysis side of this project.</p>
+  </div>
+  <hr>
+
+  <div class="introtextdiv">
+    <p class="directions">Heatmaps on either side show the Court composition by month over the 50 years, with individual Justice's color-coded blue (Liberal) to red (Conservative) by their <a href = "https://mqscores.lsa.umich.edu/index.php" target="_blank">Martin-Quinn ideological score</a>. The pie and doughnut charts below can be toggled to show Actual and Alternate Justices for the term that select decisions were handed down. Brackets denote unnamed replacement Justices, labeled with the President who would have appointed them and that President's total number of appointments at that time. Hovering over any part of the doughnut chart will also display the Justices' ideological color-coding.</p>
+  </div>
+  <hr>
+
+  <!-- Timeline Headers -->
+  <div class="Dcontainer">
+    <div class="timeheaderDiv">
+      <h class="heatHead" style="padding-left:10px"> Actual Justices (1-9)</h>
+    </div>
+
+    <div class="headContainer">
+      <h class="heatHead">Case Studies</h>
+    </div>
+
+    <div class="timeheaderDiv">
+      <h class="heatHead" style="padding-right:10px"> Alternate Justices (1-9)</h>
+    </div>
+  </div>
+  <hr>
+
+  <!-- 2020 CASE STUDY-->
+  <div class="Dcontainer">
+    <!-- 2020 Actual -->
+    <div class="actuDiv">
+      <svg width="210px" height="650px" id="actu2020"><svg>
+    </div>
+    <!-- 2020 Pie / Doughnut -->
+    <div class="PDContainer">
+      <h2>Obergefell v. Hodges : June 26, 2015</h2>
+      <p class="caseDesc">This landmark decision, which guaranteed the right to marry for same-sex couples as a fundamental liberty under the Fourteenth Amendment was actually decided 5-4, with median Justice Anthony Kennedy casting the deciding vote. In the Alternate timeline Kennedy is replaced by Bill Clinton’s 4th appointment and the decision remains the same.</p>
+      <hr>
+      <div id="togcontainer2020">
+        <label class="historytoggle">Actual
+          <input type="radio" checked="checked" name="radio2020" value="actu2020">
+          <span class="checkmark"></span>
+        </label>
+        <label class="historytoggle">Alternate
+          <input type="radio" name="radio2020" value="alt2020">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <svg width="480" height="400" id="svgPD2020"></svg>
+    </div>
+    <!-- 2020 Alternate -->
+    <div class="altDiv">
+      <svg width="210px" height="650px" id="alt2020"><svg>
+    </div>
+  </div>
+  <hr>
+
+  <!-- 2010 CASE STUDY -->
+  <div class="Dcontainer">
+    <!-- 2010 Actual -->
+    <div class="actuDiv">
+      <svg width="210px" height="650px" id="actu2010"><svg>
+    </div>
+    <!-- 2010 Pie / Doughnut -->
+    <div class="PDContainer">
+      <h2>Citizens United v. FEC : January 21, 2010 </h2>
+      <p class="caseDesc">The Actual Court ruled that, regardless of a donor’s corporate identity, political funding, as a kind of free speech, cannot be limited. Kennedy was also the swing vote here, this time siding with the Conservative wing and, by a 5-4 decision, “big money” was not regulated. However, in an Alternate Court, Kennedy is once more replaced as median Justice, this time by Stephen Breyer, who switches the Majority to the Liberal side and a 5-4 rejection of unlimited corporate donations.</p>
+      <hr>
+      <div id="togcontainer">
+        <label class="historytoggle">Actual
+          <input type="radio" checked="checked" name="radio2010" value="actu2010">
+          <span class="checkmark"></span>
+        </label>
+        <label class="historytoggle">Alternate
+          <input type="radio" name="radio2010" value="alt2010">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <svg width="480" height="400" id="svgPD2010"></svg>
+    </div>
+    <!-- 2010 Alternate-->
+    <div class="altDiv">
+      <svg width="210px" height="650px" id="alt2010"><svg>
+    </div>
+  </div>
+  <hr>
+
+  <!-- 2000 CASE STUDY-->
+  <div class="Dcontainer">
+  <!-- 2000 Actual  -->
+    <div class="actuDiv">
+      <svg width="210px" height="650px" id="actu2000"><svg>
+    </div>
+  <!-- 2000 Pie / Doughnut -->
+    <div class="PDContainer">
+      <h2>Bush v. Gore : December 12, 2000</h2>
+      <p class="caseDesc">While the Court solidly (7-2) ruled Florida's disparate recount methods in the 2000 presidential election unconstitutional, it is the 5-4 majority that halted the recount  that is most noted in popular memory. Yet again, Kennedy is the deciding vote. In the Alternate timeline: David Souter takes his place; that vote is presumably 5-4 on the Liberal side; some form of recount proceeds; and Al Gore still stands a chance of being the 43rd President (though the likelihood of that result is itself debated).</p>
+      <hr>
+      <div id="togcontainer">
+        <label class="historytoggle">Actual
+          <input type="radio" checked="checked" name="radio2000" value="actu2000">
+          <span class="checkmark"></span>
+        </label>
+        <label class="historytoggle">Alternate
+          <input type="radio" name="radio2000" value="alt2000">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <svg width="480" height="400" id="svgPD2000"></svg>
+    </div>
+    <!-- 2000 Alternate -->
+    <div class="altDiv">
+      <svg width="210px" height="650px" id="alt2000"><svg>
+    </div>
+  </div>
+  <hr>
+
+  <!-- 1990 CASE STUDY -->
+  <div class="Dcontainer">
+  <!-- 1990 Actual -->
+    <div class="actuDiv">
+      <svg width="210px" height="650px" id="actu1990"><svg>
+    </div>
+  <!-- 1990 Pie / Doughnut -->
+    <div class="PDContainer">
+      <h2>Texas v. Johnson : June 21, 1989</h2>
+      <p class="caseDesc">In this landmark case on free speech, the Court ruled that burning the American flag is protected under the First Amendment. In both Actual and Alternate timelines, the vote is 5-4. Yet while Court composition is the same, vote composition is different. The Actual sees a crossing of ideological lines that includes both Marshall and Scalia voting with Kennedy. The presumption of the Liberal wing (with Kennedy) as pro-expression in the Alternate does not change the outcome, but flaws in presuming votes based on ideology begin to show.</p>
+      <hr>
+      <div id="togcontainer">
+        <label class="historytoggle">Actual
+          <input type="radio" checked="checked" name="radio1990" value="actu1990">
+          <span class="checkmark"></span>
+        </label>
+        <label class="historytoggle">Alternate
+          <input type="radio" name="radio1990" value="alt1990">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <svg width="480" height="400" id="svgPD1990"></svg>
+    </div>
+  <!-- 1990 Alternate -->
+    <div class="altDiv">
+      <svg width="210px" height="650px" id="alt1990"><svg>
+    </div>
+  </div>
+  <hr>
+
+  <!-- 1980 CASE STUDY-->
+  <div class="Dcontainer">
+  <!-- 1980 Actual -->
+    <div class="actuDiv">
+      <svg width="210px" height="650px" id="actu1980"><svg>
+    </div>
+  <!-- 1980 Pie / Doughnut -->
+    <div class="PDContainer">
+      <h2>Roe v. Wade : January 22, 1973</h2>
+      <p class="caseDesc">One of the most famous and contentious cases in Court history, the polarizing nature of the topic is belied by the Actual 7-2 decision in favor of ‘Jane Roe’ and protection of abortion rights. The Court’s composition in the Alternate timeline remains exactly the same — and remarkably similar to the Court’s composition today. Yet if we apply the kind of Liberal-Conservative central line that we presume with today’s Court, abortion rights are likely not protected to the same degree.</p>
+      <hr>
+      <div id="togcontainer">
+        <label class="historytoggle">Actual
+          <input type="radio" checked="checked" name="radio1980" value="actu1980">
+          <span class="checkmark"></span>
+        </label>
+        <label class="historytoggle">Alternate
+          <input type="radio" name="radio1980" value="alt1980">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <svg width="480" height="400" id="svgPD1980"></svg>
+    </div>
+  <!-- 1980 Alternate -->
+    <div class="altDiv">
+      <svg width="210px" height="650px" id="alt1980"><svg>
+    </div>
+  </div>
+  <hr>
+
+  <div class="titlediv">
+        <p class="intro" style="padding: 40px 80px 0px 80px">If we look to the past to interpret the present and consider our future, then what does the application (and presumptions) of the ideologies in this Alternate timeline say about a nation’s views (founded or unfounded) on the composition of the Court today? Is it telling to look at the headlines that fear an overturning or crippling of Roe v. Wade by a Court that resembles one that voted 7-2 in favor of ‘Jane Roe?’ Has the polarization that has infected other branches of the U.S. government officially infected the most impartial — or at the very least, its citizens’ perceptions of it? While this may not ‘prove’ the need for term limits, it certainly presents a strong case. If the Judiciary, like the Legislative and Executive, is viewed as an ideological body, then perhaps similar temporal limits are not such a bad idea.</p>
+  </div>
+
+
+
+
+  <!-- Credit -->
+  <p class = "credit">Copyright 2020 Michael L Kelly : Information on Court decisions as described in the Case Studies was researched using <a href = "https://www.oyez.org/" target ="_blank">oyez.org</a> and much of the text was adapted from my own research report that utilized that site, which is available for download via the link in the introduction.</p>
+
+  <!-- End of divs and svgs -->
+
+
+  <!-- 'Universal Constants' -->
+
+  <script type="text/javascript">
+    // setting as many universal constants as possible
+
+    const svgRBGkey = d3.select("#RBGkey");
+
+    const svgActu2020 = d3.select("#actu2020");
+    const svgAlt2020 = d3.select("#alt2020");
+    const svgPD2020 = d3.select("#svgPD2020");
+
+    const svgActu2010 = d3.select("#actu2010");
+    const svgAlt2010 = d3.select("#alt2010");
+    const svgPD2010 = d3.select("#svgPD2010");
+
+    const svgActu2000 = d3.select("#actu2000");
+    const svgAlt2000 = d3.select("#alt2000");
+    const svgPD2000 = d3.select("#svgPD2000");
+
+    const svgActu1990 = d3.select("#actu1990");
+    const svgAlt1990 = d3.select("#alt1990");
+    const svgPD1990 = d3.select("#svgPD1990");
+
+    const svgActu1980 = d3.select("#actu1980");
+    const svgAlt1980 = d3.select("#alt1980");
+    const svgPD1980 = d3.select("#svgPD1980");
+
+    // width for all Pie / doughnut areas
+    const PDwidth = 480;
+    const PDheight = 350;
+
+    // SIZES and COLORS for DM pies
+    // set the outer radius just within the svg
+    const DMouterRadius = (PDwidth / 2) - 65;
+    const DMinnerRadius = 0;
+
+    const maxData = 1;
+    const minData = 0;
+    const DMColor = d3.scaleSequential()
+      .domain([minData, maxData])
+      .interpolator(d3.interpolate("burlywood", "peru"));
+    // SIZES and COLORS for decision/ideo doughnuts
+    const outerRadius = (PDwidth / 2) - 70;
+    const innerRadius = outerRadius - (.33 * outerRadius);
+    const MQmaxData = 4;
+    const MQminData = -3;
+    const MQColor = d3.scaleSequential()
+      .domain([MQminData, MQmaxData])
+      .interpolator(d3.interpolate("cornflowerblue", "crimson"));
+
+    // for Actual and Alternate heatmaps
+    const w = 200;
+    const h = 650;
+
+    const MQScores = ["J1MQ", "J2MQ", "J3MQ", "J4MQ", "J5MQ", "J6MQ", "J7MQ", "J8MQ", "J9MQ"];
+
+    // include FUNCTIONS for later use
+
+    // the below is from: https://stackoverflow.com/questions/24784302/wrapping-text-in-d3
+    // which itself builds on bostock: https://bl.ocks.org/mbostock/7555321
+
+    function wrap(text, width) {
+      text.each(function() {
+        var text = d3.select(this),
+          words = text.text().split(/\s+/).reverse(),
+          word,
+          line = [],
+          lineNumber = 0,
+          lineHeight = 1.1, // ems
+          x = text.attr("x"),
+          y = text.attr("y"),
+          dy = 0, //parseFloat(text.attr("dy")),
+          tspan = text.text(null)
+          .append("tspan")
+          .attr("x", x)
+          .attr("y", y)
+          .attr("dy", dy + "em");
+        while (word = words.pop()) {
+          line.push(word);
+          tspan.text(line.join(" "));
+          if (tspan.node().getComputedTextLength() > width) {
+            line.pop();
+            tspan.text(line.join(" "));
+            line = [word];
+            tspan = text.append("tspan")
+              .attr("x", x)
+              .attr("y", y)
+              .attr("dy", ++lineNumber * lineHeight + dy + "em")
+              .text(word);
+          }
+        }
+      });
+    }
+    // heatmap function I crafted for making vacancies background color before color-coding bricks
+    // helpful https://stackoverflow.com/questions/31788706/d3-if-else-to-set-color/31788858 - as was the function work above
+    function heatmap(rect) {
+      rect.each(function() {
+        var rect = d3.select(this)
+          .attr("fill", (d => {
+            if (d.Value == 0) {
+              return "ivory"
+            } else {
+              return (MQColor(+d.Value))
+            }
+          }));
+      });
+    }
+
+
+// -------------------- Data / Viz Creation ----------------------------------//
+
+    //------------------------- RBG Collar Illustration ---------------------------//
+    const RBGdataset = [10, 10, 10, 10, 10, 10, 10, 10, 10];
+    const RBGw = 940;
+    const RBGouter = RBGw / 6;
+    const RBGinner = RBGw / 10;
+
+    const RBGarcs = d3.arc()
+      .innerRadius(90)
+      .outerRadius(240)
+      .cornerRadius(3);
+
+    const RBG = d3.pie()
+      .padAngle(.02)
+      .startAngle(0.52 * Math.PI)
+      .endAngle(1.48 * Math.PI);
+
+    const RBGgroups = svgRBGkey.selectAll("g.arc")
+      .data(RBG(RBGdataset))
+      .enter()
+      .append("g")
+      .attr("transform", "translate(" + RBGw / 2 + "," + 20 + ")");
+
+    const RBGpath = RBGgroups.append("path")
+      .attr("d", RBGarcs)
+      .data(RBGdataset)
+      .attr("fill", "ivory")
+      .attr("id", "RBGpath");
+
+    svgRBGkey.append("text")
+      .attr("class", "keylabels")
+      .attr("x", -200)
+      .attr("y", 15)
+      .attr("text-anchor", "middle")
+      .attr("transform", "rotate(-90)")
+      .text("Liberal");
+
+    svgRBGkey.append("text")
+      .attr("class", "keylabels")
+      .attr("x", 200)
+      .attr("y", -925)
+      .attr("text-anchor", "middle")
+      .attr("transform", "rotate(90)")
+      .text("Conservative");
+
+
+    // -------------------- 2020 Content ------------------------------//
+
+    // 2020 Actu Heatmap Content
+    d3.csv("DASC_18yr_actu_sorted_2020.csv").then(dataset => {
+      // Heatmap scales
+      const actuXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([10, w + 10])
+        .padding(0.01);
+
+      const actuYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const actuBricks = svgActu2020.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => actuXScale(d.MQScore))
+        .attr("y", d => actuYScale(d.Month))
+        .attr("width", actuXScale.bandwidth())
+        .attr("height", actuYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+// Because heatmap csv is by month/year combo, creating axes in my own manner
+      const yearset2020actu = ["2020•", "2019•", "2018•", "2017•", "2016•", "2015•", "2014•", "2013•", "2012•", "2011•"]
+
+      const years2020actu = svgActu2020.selectAll("text")
+        .data(yearset2020actu)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * -12 * (h / 120))
+        .attr("y", 9)
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .text((d, i) => d);
+    })
+    // end of Actu2020 csv
+
+    // 2020 Alt Heatmap Content
+    d3.csv("DASC_18yr_alt_sorted_2020.csv").then(dataset => {
+      // Heatmap scales
+      const altXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([0, w])
+        .padding(0.01);
+
+      const altYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const altBricks = svgAlt2020.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => altXScale(d.MQScore))
+        .attr("y", d => altYScale(d.Month))
+        .attr("width", altXScale.bandwidth())
+        .attr("height", altYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      // label year axis, since year-month categories don't quite work here
+      const yearset2020alt = ["•2020", "•2019", "•2018", "•2017", "•2016", "•2015", "•2014", "•2013", "•2012", "•2011"]
+
+      const years2020alt = svgAlt2020.selectAll("text")
+        .data(yearset2020alt)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * 12 * (h / 120))
+        .attr("y", -201)
+        .attr("text-anchor", "beginning")
+        .attr("transform", "rotate(90)")
+        .text((d, i) => d);
+    })
+    // end of Alt2020 csv
+
+    // 2020 Pie / Doughnut Content and actions
+    d3.csv("obergefellVhodges_dataset_3.csv").then(dataset => {
+      // PIE
+      //create wedges for DM Pie
+      const Pi2020arcs = d3.arc()
+        .innerRadius(DMinnerRadius)
+        .outerRadius(DMouterRadius);
+      //generate pie
+      const Pi2020 = d3.pie().value(d => d.pievalue).sort(null);
+      //transform translate arcs
+      const Pi2020groups = svgPD2020.selectAll("g.Pi2020arc")
+        .data(Pi2020(dataset))
+        .enter()
+        .append("g")
+        .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+      const Pi2020path = Pi2020groups.append("path")
+        .attr("d", Pi2020arcs)
+        .data(dataset)
+        .attr("fill", (d => DMColor(+d.voteVal)))
+        .attr("class", "DMarc")
+        .attr("id", "Pi2020path");
+
+      // DOUGHNUT
+      //create wedges for ideological doughnut
+      const Do2020arcs = d3.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius);
+      // generate doughnut
+      const Do2020 = d3.pie().value(d => d.pievalue).sort(null)
+        .padAngle(.02);
+
+      const Do2020groups = svgPD2020.selectAll("g.arc")
+        .data(Do2020(dataset))
+        .enter()
+        .append("g")
+        .attr("class", "JustArc")
+        .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+      const Do2020path = Do2020groups.append("path")
+        .attr("d", Do2020arcs)
+        .data(dataset)
+        .attr("fill", (d => DMColor(+d.voteVal)))
+        .attr("id", "Do2020path")
+        .on("mouseover", (event, d) => {
+          d3.selectAll("#Do2020path")
+            .transition()
+            .duration(800)
+            .attr("fill", (d => MQColor(+d.MQScore)))
+        })
+        .on("mouseout", (event, d) => {
+          d3.selectAll("#Do2020path")
+            .transition()
+            .duration(800)
+            .attr("fill", (d => DMColor(+d.voteVal)));
+        });
+      // PD2020 Labels and such
+      // Take another look at centroid labels later
+      Do2020groups.append("text")
+        .attr("transform", d => "translate(" + Do2020arcs.centroid(d) + ")")
+        .attr("text-anchor", "middle")
+        .attr("class", "PiLabels")
+        .attr("id", "Do2020label")
+        .data(dataset)
+        .text(d => d.justice);
+      // label majority and dissent and id
+      const MDlabel1 = svgPD2020.append("text")
+        .attr("class", "MDLabels")
+        .attr("x", PDwidth / 2 - 10)
+        .attr("y", PDheight / 2 - 10)
+        .attr("text-anchor", "end")
+        .text("Majority")
+        .attr("id", "MD2020label1");
+
+      const MDlabel2 = svgPD2020.append("text")
+        .attr("class", "MDLabels")
+        .attr("x", PDwidth / 2 + 10)
+        .attr("y", PDheight / 2 - 10)
+        .attr("text-anchor", "beginning")
+        .text("Dissent")
+        .attr("id", "MD2020label2");
+      // label decision and id
+      const Do2020decision = svgPD2020.append("text")
+        .attr("class", "decision")
+        .attr("x", PDwidth / 2)
+        .attr("y", PDheight / 2 - 30)
+        .attr("text-anchor", "middle")
+        .text("5-4")
+        .attr("id", "MD2020Decision");
+      // describe decision
+      const Do2020Description = svgPD2020.append("text")
+        .attr("class", "description")
+        .attr("x", PDwidth / 2)
+        .attr("y", PDheight / 2 + 30)
+        .attr("text-anchor", "middle")
+        .text("Gay Marriage Is a Fundamental Right")
+        .call(wrap, 180)
+        .attr("id", "MD2020Description");
+      // highlight row in actual heatmap as default
+      svgActu2020.append("rect")
+        .attr("x", 0)
+        .attr("y", 67 * (h / 120))
+        .attr("width", w)
+        .attr("height", h / 120)
+        .attr("class", "highlight")
+        .attr("opacity", 0.5)
+        .attr("id", "actu2020high");
+      // highlight row in alternate heatmap so it can be selected later
+      svgAlt2020.append("rect")
+        .attr("x", 0)
+        .attr("y", 67 * (h / 120))
+        .attr("width", w)
+        .attr("height", h / 120)
+        .attr("class", "highlight")
+        .attr("opacity", 0.0)
+        .attr("id", "alt2020high");
+        // toggling
+      d3.selectAll("input[value='actu2020']")
+        .on("change", (event, d) => {
+        // show and hide highlights
+          d3.selectAll("#actu2020high")
+            .attr("opacity", 0.5);
+          d3.selectAll("#alt2020high")
+            .attr("opacity", 0.0);
+        // mouseover to reveal Justice ideologies
+          d3.selectAll("#Do2020path")
+            .attr("fill", (d => DMColor(+d.voteVal)))
+            .on("mouseover", (event, d) => {
+              d3.selectAll("#Do2020path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => MQColor(+d.MQScore)))
+            })
+            .on("mouseout", (event, d) => {
+              d3.selectAll("#Do2020path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => DMColor(+d.voteVal)));
+            });
+        // label Justice names
+          d3.selectAll("#Do2020label")
+            .data(dataset)
+            .text(d => d.justice);
+        });
+
+      d3.selectAll("input[value='alt2020']")
+        .on("change", (event, d) => {
+          // switches highlights
+          d3.selectAll("#alt2020high")
+            .attr("opacity", 0.5);
+          d3.selectAll("#actu2020high")
+            .attr("opacity", 0.0);
+        // mouseover to show alt ideologies
+          d3.selectAll("#Do2020path")
+            .attr("fill", (d => DMColor(+d.altVoteVal)))
+            .on("mouseover", (event, d) => {
+              d3.selectAll("#Do2020path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => MQColor(+d.altMQScore)))
+            })
+            .on("mouseout", (event, d) => {
+              d3.selectAll("#Do2020path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => DMColor(+d.altVoteVal)));
+            });
+        // label alt Justice names
+          d3.selectAll("#Do2020label")
+            .data(dataset)
+            .text(d => d.altJustice);
+        });
+    })
+      // end of PD2020 csv
+
+    // ------------------------------------------------------------
+
+    // 2010 CONTENT
+
+    // 2010 Actu Heatmap Content
+    d3.csv("DASC_18yr_actu_sorted_2010.csv").then(dataset => {
+      // Heatmap scales
+      const actuXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([10, w + 10])
+        .padding(0.01);
+
+      const actuYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const actuBricks = svgActu2010.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => actuXScale(d.MQScore))
+        .attr("y", d => actuYScale(d.Month))
+        .attr("width", actuXScale.bandwidth())
+        .attr("height", actuYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      const yearset2010actu = ["2010•", "2009•", "2008•", "2007•", "2006•", "2005•", "2004•", "2003•", "2002•", "2001•"]
+
+      const years2010actu = svgActu2010.selectAll("text")
+        .data(yearset2010actu)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * -12 * (h / 120))
+        .attr("y", 9)
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .text((d, i) => d);
+    })
+      // end of Actu2010 csv
+
+    // 2010 Alt Heatmap Content
+    d3.csv("DASC_18yr_alt_sorted_2010.csv").then(dataset => {
+      // Heatmap scales
+      const altXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([0, w])
+        .padding(0.01);
+
+      const altYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const altBricks = svgAlt2010.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => altXScale(d.MQScore))
+        .attr("y", d => altYScale(d.Month))
+        .attr("width", altXScale.bandwidth())
+        .attr("height", altYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      const yearset2010alt = ["•2010", "•2009", "•2008", "•2007", "•2006", "•2005", "•2004", "•2003", "•2002", "•2001"]
+
+      const years2010alt = svgAlt2010.selectAll("text")
+        .data(yearset2010alt)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * 12 * (h / 120))
+        .attr("y", -201)
+        .attr("text-anchor", "beginning")
+        .attr("transform", "rotate(90)")
+        .text((d, i) => d);
+    })
+      // end of Alt2010 csv
+
+    // 2010 Pie / Doughnut Content and actions
+    d3.csv("citizensunitedVfec_dataset.csv").then(dataset => {
+      // PIE
+      //wedges for DM Pie
+      const Pi2010arcs = d3.arc()
+        .innerRadius(DMinnerRadius)
+        .outerRadius(DMouterRadius);
+      //generate pie
+      const Pi2010 = d3.pie().value(d => d.pievalue).sort(null);
+      //arcs
+      const Pi2010groups = svgPD2010.selectAll("g.Pi2010arc")
+        .data(Pi2010(dataset))
+        .enter()
+        .append("g")
+        .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+      const Pi2010path = Pi2010groups.append("path")
+        .attr("d", Pi2010arcs)
+        .data(dataset)
+        .attr("fill", (d => DMColor(+d.voteVal)))
+        // .style("opacity", 0.15)
+        .attr("class", "DMarc")
+        .attr("id", "Pi2010path");
+
+      // DOUGHNUT
+      const Do2010arcs = d3.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius);
+      const Do2010 = d3.pie().value(d => d.pievalue).sort(null);
+
+      const Do2010groups = svgPD2010.selectAll("g.arc")
+        .data(Do2010(dataset))
+        .enter()
+        .append("g")
+        .attr("class", "JustArc")
+        .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+      const Do2010path = Do2010groups.append("path")
+        .attr("stroke", "cornsilk")
+        .attr("stroke-width", "2px")
+        .attr("d", Do2010arcs)
+        .data(dataset)
+        .attr("fill", (d => DMColor(+d.voteVal)))
+        .attr("id", "Do2010path")
+        .on("mouseover", (event, d) => {
+          d3.selectAll("#Do2010path")
+            .transition()
+            .duration(800)
+            .attr("fill", (d => MQColor(+d.MQScore)))
+        })
+        .on("mouseout", (event, d) => {
+          d3.selectAll("#Do2010path")
+            .transition()
+            .duration(800)
+            .attr("fill", (d => DMColor(+d.voteVal)));
+        });
+      // PD2010 Labels and such
+      Do2010groups.append("text")
+        .attr("transform", d => "translate(" + Do2010arcs.centroid(d) + ")")
+        .attr("text-anchor", "middle")
+        .attr("class", "PiLabels")
+        .attr("id", "Do2010label")
+        .data(dataset)
+        .text(d => d.justice);
+
+      const MDlabel1 = svgPD2010.append("text")
+        .attr("class", "MDLabels")
+        .attr("x", PDwidth / 2 - 10)
+        .attr("y", PDheight / 2 - 10)
+        .attr("text-anchor", "end")
+        .text("Dissent")
+        .attr("id", "MD2010label1");
+
+      const MDlabel2 = svgPD2010.append("text")
+        .attr("class", "MDLabels")
+        .attr("x", PDwidth / 2 + 10)
+        .attr("y", PDheight / 2 - 10)
+        .attr("text-anchor", "beginning")
+        .text("Majority")
+        .attr("id", "MD2010label2");
+
+      const Do2010decision = svgPD2010.append("text")
+        .attr("class", "decision")
+        .attr("x", PDwidth / 2)
+        .attr("y", PDheight / 2 - 30)
+        .attr("text-anchor", "middle")
+        .text("4-5")
+        .attr("id", "MD2010Decision");
+
+      const Do2010Description = svgPD2010.append("text")
+        .attr("class", "description")
+        .attr("x", PDwidth / 2)
+        .attr("y", PDheight / 2 + 20)
+        .attr("text-anchor", "middle")
+        .text("Corporate Funding Cannot Be Limited")
+        .call(wrap, 180)
+        .attr("id", "MD2010Description");
+
+      svgActu2010.append("rect")
+        .attr("x", 0)
+        .attr("y", 11 * (h / 120))
+        .attr("width", w)
+        .attr("height", h / 120)
+        .attr("class", "highlight")
+        .attr("opacity", 0.5)
+        .attr("id", "actu2010high");
+
+      svgAlt2010.append("rect")
+        .attr("x", 0)
+        .attr("y", 11 * (h / 120))
+        .attr("width", w)
+        .attr("height", h / 120)
+        .attr("class", "highlight")
+        .attr("opacity", 0.0)
+        .attr("id", "alt2010high");
+
+      d3.selectAll("input[value='actu2010']")
+        .on("change", (event, d) => {
+
+          d3.selectAll("#actu2010high")
+            .attr("opacity", 0.5);
+
+          d3.selectAll("#alt2010high")
+            .attr("opacity", 0.0);
+
+          d3.selectAll("#Do2010path")
+            .attr("fill", (d => DMColor(+d.voteVal)))
+            .on("mouseover", (event, d) => {
+              d3.selectAll("#Do2010path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => MQColor(+d.MQScore)))
+            })
+            .on("mouseout", (event, d) => {
+              d3.selectAll("#Do2010path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => DMColor(+d.voteVal)));
+            });
+          d3.selectAll("#Pi2010path")
+            .attr("fill", (d => DMColor(+d.voteVal)));
+
+          d3.selectAll("#Do2010label")
+            .data(dataset)
+            .text(d => d.justice);
+
+          d3.selectAll("#MD2010label1")
+            .text("Dissent");
+          d3.selectAll("#MD2010label2")
+            .text("Majority");
+          d3.selectAll("#MD2010Decision")
+            .text("4-5");
+          d3.selectAll("#MD2010Description")
+            .text("Corporate Funding Cannot Be Limited")
+            .call(wrap, 180);
+        });
+
+      d3.selectAll("input[value='alt2010']")
+        .on("change", (event, d) => {
+          // highlight row in heatmap
+          d3.selectAll("#alt2010high")
+            .attr("opacity", 0.5);
+
+          d3.selectAll("#actu2010high")
+            .attr("opacity", 0.0);
+
+          d3.selectAll("#Do2010path")
+            .attr("fill", (d => DMColor(+d.altVoteVal)))
+            .on("mouseover", (event, d) => {
+              d3.selectAll("#Do2010path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => MQColor(+d.altMQScore)))
+            })
+            .on("mouseout", (event, d) => {
+              d3.selectAll("#Do2010path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => DMColor(+d.altVoteVal)));
+            });
+          d3.selectAll("#Pi2010path")
+            .attr("fill", (d => DMColor(+d.altVoteVal)));
+
+          d3.selectAll("#Do2010label")
+            .data(dataset)
+            .text(d => d.altJustice);
+
+          d3.selectAll("#MD2010label1")
+            .text("Majority");
+          d3.selectAll("#MD2010label2")
+            .text("Dissent");
+          d3.selectAll("#MD2010Decision")
+            .text("5-4");
+          d3.selectAll("#MD2010Description")
+            .text("Corporate Funding Can Be Limited")
+            .call(wrap, 180);
+        });
+      })
+      // end of PD2010 csv
+
+
+    // ---------------------- 2000 CONTENT ----------------------//
+
+    // 2000 Actu Heatmap Content
+    d3.csv("DASC_18yr_actu_sorted_2000.csv").then(dataset => {
+      // Heatmap scales
+      const actuXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([10, w + 10])
+        .padding(0.01);
+
+      const actuYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const actuBricks = svgActu2000.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => actuXScale(d.MQScore))
+        .attr("y", d => actuYScale(d.Month))
+        .attr("width", actuXScale.bandwidth())
+        .attr("height", actuYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      const yearset2000actu = ["2000•", "1999•", "1998•", "1997•", "1996•", "1995•", "1994•", "1993•", "1992•", "1991•"]
+
+      const years2000actu = svgActu2000.selectAll("text")
+        .data(yearset2000actu)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * -12 * (h / 120))
+        .attr("y", 9)
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .text((d, i) => d);
+      })
+      // end of Actu2000 csv
+
+    // 2000 Alt Heatmap Content
+    d3.csv("DASC_18yr_alt_sorted_2000.csv").then(dataset => {
+      // Heatmap scales
+      const altXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([0, w])
+        .padding(0.01);
+
+      const altYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const altBricks = svgAlt2000.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => altXScale(d.MQScore))
+        .attr("y", d => altYScale(d.Month))
+        .attr("width", altXScale.bandwidth())
+        .attr("height", altYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      const yearset2000alt = ["•2000", "•1999", "•1998", "•1997", "•1996", "•1995", "•1994", "•1993", "•1992", "•1991"]
+
+      const years2000alt = svgAlt2000.selectAll("text")
+        .data(yearset2000alt)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * 12 * (h / 120))
+        .attr("y", -201)
+        .attr("text-anchor", "beginning")
+        .attr("transform", "rotate(90)")
+        .text((d, i) => d);
+      })
+    // end of Alt2000 csv
+
+    // 2000 Pie / Doughnut Content and actions
+    d3.csv("bushVgore_dataset.csv").then(dataset => {
+      // PIE
+      //create wedges
+      const Pi2000arcs = d3.arc()
+        .innerRadius(DMinnerRadius)
+        .outerRadius(DMouterRadius);
+      //generate pie
+      const Pi2000 = d3.pie().value(d => d.pievalue).sort(null);
+      //transform translate for arcs
+      const Pi2000groups = svgPD2000.selectAll("g.Pi2000arc")
+        .data(Pi2000(dataset))
+        .enter()
+        .append("g")
+        .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+      const Pi2000path = Pi2000groups.append("path")
+        .attr("d", Pi2000arcs)
+        .data(dataset)
+        .attr("fill", (d => DMColor(+d.voteVal)))
+        .attr("class", "DMarc")
+        .attr("id", "Pi2000path");
+
+      // DOUGHNUT
+      const Do2000arcs = d3.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius);
+      const Do2000 = d3.pie().value(d => d.pievalue).sort(null);
+
+      const Do2000groups = svgPD2000.selectAll("g.arc")
+        .data(Do2000(dataset))
+        .enter()
+        .append("g")
+        .attr("class", "JustArc")
+        .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+      const Do2000path = Do2000groups.append("path")
+        .attr("stroke", "cornsilk")
+        .attr("stroke-width", "2px")
+        .attr("d", Do2000arcs)
+        .data(dataset)
+        .attr("fill", (d => DMColor(+d.voteVal)))
+        .attr("id", "Do2000path")
+        .on("mouseover", (event, d) => {
+          d3.selectAll("#Do2000path")
+            .transition()
+            .duration(800)
+            .attr("fill", (d => MQColor(+d.MQScore)))
+        })
+        .on("mouseout", (event, d) => {
+          d3.selectAll("#Do2000path")
+            .transition()
+            .duration(800)
+            .attr("fill", (d => DMColor(+d.voteVal)));
+        });
+      // PD2000 Labels and such
+      Do2000groups.append("text")
+        .attr("transform", d => "translate(" + Do2000arcs.centroid(d) + ")")
+        .attr("text-anchor", "middle")
+        .attr("class", "PiLabels")
+        .attr("id", "Do2000label")
+        .data(dataset)
+        .text(d => d.justice);
+
+      const MDlabel1 = svgPD2000.append("text")
+        .attr("class", "MDLabels")
+        .attr("x", PDwidth / 2 - 10)
+        .attr("y", PDheight / 2 - 10)
+        .attr("text-anchor", "end")
+        .text("Dissent")
+        .attr("id", "MD2000label1");
+
+      const MDlabel2 = svgPD2000.append("text")
+        .attr("class", "MDLabels")
+        .attr("x", PDwidth / 2 + 10)
+        .attr("y", PDheight / 2 - 10)
+        .attr("text-anchor", "beginning")
+        .text("Majority")
+        .attr("id", "MD2000label2");;
+
+      const Do2000decision = svgPD2000.append("text")
+        .attr("class", "decision")
+        .attr("x", PDwidth / 2)
+        .attr("y", PDheight / 2 - 30)
+        .attr("text-anchor", "middle")
+        .text("4-5")
+        .attr("id", "MD2000Decision");
+
+      const Do2000Description = svgPD2000.append("text")
+        .attr("class", "description")
+        .attr("x", PDwidth / 2)
+        .attr("y", PDheight / 2 + 30)
+        .attr("text-anchor", "middle")
+        .text("Florida Recount Halted")
+        .call(wrap, 180)
+        .attr("id", "MD2000Description");
+
+      svgActu2000.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", w)
+        .attr("height", h / 120)
+        .attr("class", "highlight")
+        .attr("opacity", 0.5)
+        .attr("id", "actu2000high");
+
+      svgAlt2000.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", w)
+        .attr("height", h / 120)
+        .attr("class", "highlight")
+        .attr("opacity", 0.0)
+        .attr("id", "alt2000high");
+
+
+      d3.selectAll("input[value='actu2000']")
+        .on("change", (event, d) => {
+
+          d3.selectAll("#actu2000high")
+            .attr("opacity", 0.5);
+
+          d3.selectAll("#alt2000high")
+            .attr("opacity", 0.0);
+
+          d3.selectAll("#Do2000path")
+            .attr("fill", (d => DMColor(+d.voteVal)))
+            .on("mouseover", (event, d) => {
+              d3.selectAll("#Do2000path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => MQColor(+d.MQScore)))
+            })
+            .on("mouseout", (event, d) => {
+              d3.selectAll("#Do2000path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => DMColor(+d.voteVal)));
+            });
+          d3.selectAll("#Pi2000path")
+            .attr("fill", (d => DMColor(+d.voteVal)));
+
+          d3.selectAll("#Do2000label")
+            .data(dataset)
+            .text(d => d.justice);
+
+          d3.selectAll("#MD2000label1")
+            .text("Dissent");
+          d3.selectAll("#MD2000label2")
+            .text("Majority");
+          d3.selectAll("#MD2000Decision")
+            .text("4-5");
+          d3.selectAll("#MD2000Description")
+            .text("Florida Recount Halted")
+            .call(wrap, 180);
+        });
+
+      d3.selectAll("input[value='alt2000']")
+        .on("change", (event, d) => {
+          // highlight row in heatmap
+          d3.selectAll("#alt2000high")
+            .attr("opacity", 0.5);
+
+          d3.selectAll("#actu2000high")
+            .attr("opacity", 0.0);
+
+          d3.selectAll("#Do2000path")
+            .attr("fill", (d => DMColor(+d.altVoteVal)))
+            .on("mouseover", (event, d) => {
+              d3.selectAll("#Do2000path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => MQColor(+d.altMQScore)))
+            })
+            .on("mouseout", (event, d) => {
+              d3.selectAll("#Do2000path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => DMColor(+d.altVoteVal)));
+            });
+          d3.selectAll("#Pi2000path")
+            .attr("fill", (d => DMColor(+d.altVoteVal)));
+
+          d3.selectAll("#Do2000label")
+            .data(dataset)
+            .text(d => d.altJustice);
+
+          d3.selectAll("#MD2000label1")
+            .text("Majority");
+          d3.selectAll("#MD2000label2")
+            .text("Dissent");
+          d3.selectAll("#MD2000Decision")
+            .text("5-4");
+          d3.selectAll("#MD2000Description")
+            .text("Florida Recount Proceeds")
+            .call(wrap, 180);
+        });
+    })
+    // end of PD2000 csv
+
+
+    // ------------------------------- 1990 CONTENT
+
+    // 1990 Actu Heatmap Content
+    d3.csv("DASC_18yr_actu_sorted_1990.csv").then(dataset => {
+      // Heatmap scales
+      const actuXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([10, w + 10])
+        .padding(0.01);
+
+      const actuYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const actuBricks = svgActu1990.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => actuXScale(d.MQScore))
+        .attr("y", d => actuYScale(d.Month))
+        .attr("width", actuXScale.bandwidth())
+        .attr("height", actuYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      const yearset1990actu = ["1990•", "1989•", "1988•", "1987•", "1986•", "1985•", "1984•", "1983•", "1982•", "1981•"]
+
+      const years1990actu = svgActu1990.selectAll("text")
+        .data(yearset1990actu)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * -12 * (h / 120))
+        .attr("y", 9)
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .text((d, i) => d);
+    })
+      // end of Actu1990 csv
+
+    // 1990 Alt Heatmap Content
+    d3.csv("DASC_18yr_alt_sorted_1990.csv").then(dataset => {
+      // Heatmap scales
+      const altXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([0, w])
+        .padding(0.01);
+
+      const altYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const altBricks = svgAlt1990.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => altXScale(d.MQScore))
+        .attr("y", d => altYScale(d.Month))
+        .attr("width", altXScale.bandwidth())
+        .attr("height", altYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      const yearset1990alt = ["•1990", "•1989", "•1988", "•1987", "•1986", "•1985", "•1984", "•1983", "•1982", "•1981"]
+
+      const years1990alt = svgAlt1990.selectAll("text")
+        .data(yearset1990alt)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * 12 * (h / 120))
+        .attr("y", -201)
+        .attr("text-anchor", "beginning")
+        .attr("transform", "rotate(90)")
+        .text((d, i) => d);
+    })
+      // end of Alt1990 csv
+
+    // 1990 Pie / Doughnut Content and actions
+    d3.csv("texasVjohnson_dataset.csv").then(dataset => {
+      // PIE
+      //create wedges
+      const Pi1990arcs = d3.arc()
+        .innerRadius(DMinnerRadius)
+        .outerRadius(DMouterRadius);
+      //generate pie
+      const Pi1990 = d3.pie().value(d => d.pievalue).sort(null);
+      //transform translate for arcs
+      const Pi1990groups = svgPD1990.selectAll("g.Pi1990arc")
+        .data(Pi1990(dataset))
+        .enter()
+        .append("g")
+        .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+      const Pi1990path = Pi1990groups.append("path")
+        .attr("d", Pi1990arcs)
+        .data(dataset)
+        .attr("fill", (d => DMColor(+d.voteVal)))
+        .attr("class", "DMarc")
+        .attr("id", "Pi1990path");
+
+      // DOUGHNUT
+      const Do1990arcs = d3.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius);
+      const Do1990 = d3.pie().value(d => d.pievalue).sort(null);
+
+      const Do1990groups = svgPD1990.selectAll("g.arc")
+        .data(Do1990(dataset))
+        .enter()
+        .append("g")
+        .attr("class", "JustArc")
+        .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+      const Do1990path = Do1990groups.append("path")
+        .attr("stroke", "cornsilk")
+        .attr("stroke-width", "2px")
+        .attr("d", Do1990arcs)
+        .data(dataset)
+        .attr("fill", (d => DMColor(+d.voteVal)))
+        .attr("id", "Do1990path")
+        .on("mouseover", (event, d) => {
+          d3.selectAll("#Do1990path")
+            .transition()
+            .duration(800)
+            .attr("fill", (d => MQColor(+d.MQScore)))
+        })
+        .on("mouseout", (event, d) => {
+          d3.selectAll("#Do1990path")
+            .transition()
+            .duration(800)
+            .attr("fill", (d => DMColor(+d.voteVal)));
+        });
+      // PD1990 Labels and such
+      Do1990groups.append("text")
+        .attr("transform", d => "translate(" + Do1990arcs.centroid(d) + ")")
+        .attr("text-anchor", "middle")
+        .attr("class", "PiLabels")
+        .attr("id", "Do1990label")
+        .data(dataset)
+        .text(d => d.justice);
+
+      const MDlabel1 = svgPD1990.append("text")
+        .attr("class", "MDLabels")
+        .attr("x", PDwidth / 2 - 10)
+        .attr("y", PDheight / 2 - 10)
+        .attr("text-anchor", "end")
+        .text("Majority")
+        .attr("id", "MD1990label1");
+
+      const MDlabel2 = svgPD1990.append("text")
+        .attr("class", "MDLabels")
+        .attr("x", PDwidth / 2 + 10)
+        .attr("y", PDheight / 2 - 10)
+        .attr("text-anchor", "beginning")
+        .text("Dissent")
+        .attr("id", "MD1990label2");;
+
+      const Do1990decision = svgPD1990.append("text")
+        .attr("class", "decision")
+        .attr("x", PDwidth / 2)
+        .attr("y", PDheight / 2 - 30)
+        .attr("text-anchor", "middle")
+        .text("5-4")
+        .attr("id", "MD1990Decision");
+
+      const Do1990Description = svgPD1990.append("text")
+        .attr("class", "description")
+        .attr("x", PDwidth / 2)
+        .attr("y", PDheight / 2 + 30)
+        .attr("text-anchor", "middle")
+        .text("Flag Burning Protected")
+        .call(wrap, 180)
+        .attr("id", "MD1990Description");
+
+      svgActu1990.append("rect")
+        .attr("x", 0)
+        .attr("y", 18 * (h / 120))
+        .attr("width", w)
+        .attr("height", h / 120)
+        .attr("class", "highlight")
+        .attr("opacity", 0.5)
+        .attr("id", "actu1990high");
+
+      svgAlt1990.append("rect")
+        .attr("x", 0)
+        .attr("y", 18 * (h / 120))
+        .attr("width", w)
+        .attr("height", h / 120)
+        .attr("class", "highlight")
+        .attr("opacity", 0.0)
+        .attr("id", "alt1990high");
+
+      d3.selectAll("input[value='actu1990']")
+        .on("change", (event, d) => {
+
+          d3.selectAll("#actu1990high")
+            .attr("opacity", 0.5);
+
+          d3.selectAll("#alt1990high")
+            .attr("opacity", 0.0);
+
+          d3.selectAll("#Do1990path")
+            .attr("fill", (d => DMColor(+d.voteVal)))
+            .on("mouseover", (event, d) => {
+              d3.selectAll("#Do1990path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => MQColor(+d.MQScore)))
+            })
+            .on("mouseout", (event, d) => {
+              d3.selectAll("#Do1990path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => DMColor(+d.voteVal)));
+            });
+          d3.selectAll("#Pi1990path")
+            .attr("fill", (d => DMColor(+d.voteVal)));
+
+          d3.selectAll("#Do1990label")
+            .data(dataset)
+            .text(d => d.justice);
+
+          d3.selectAll("#MD1990label1")
+            .text("Majority");
+          d3.selectAll("#MD1990label2")
+            .text("Dissent");
+          d3.selectAll("#MD1990Decision")
+            .text("5-4");
+          d3.selectAll("#MD1990Description")
+            .text("Flag Burning Protected")
+            .call(wrap, 180);
+        });
+
+      d3.selectAll("input[value='alt1990']")
+        .on("change", (event, d) => {
+
+          // highlight row in heatmap
+          d3.selectAll("#alt1990high")
+            .attr("opacity", 0.5);
+
+          d3.selectAll("#actu1990high")
+            .attr("opacity", 0.0);
+
+          d3.selectAll("#Do1990path")
+            .attr("fill", (d => DMColor(+d.altVoteVal)))
+            .on("mouseover", (event, d) => {
+              d3.selectAll("#Do1990path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => MQColor(+d.altMQScore)))
+            })
+            .on("mouseout", (event, d) => {
+              d3.selectAll("#Do1990path")
+                .transition()
+                .duration(800)
+                .attr("fill", (d => DMColor(+d.altVoteVal)));
+            });
+          d3.selectAll("#Pi1990path")
+            .attr("fill", (d => DMColor(+d.altVoteVal)));
+
+          d3.selectAll("#Do1990label")
+            .data(dataset)
+            .text(d => d.altJustice);
+
+          d3.selectAll("#MD1990label1")
+            .text("Majority");
+          d3.selectAll("#MD1990label2")
+            .text("Dissent");
+          d3.selectAll("#MD1990Decision")
+            .text("5-4");
+          d3.selectAll("#MD1990Description")
+            .text("Flag Burning Protected")
+            .call(wrap, 180);
+        });
+    })
+    // end of PD1990 csv
+
+
+
+    // ----------------------------- 1980 CONTENT
+
+    // 1980 Actu Heatmap Content
+    d3.csv("DASC_18yr_actu_sorted_1980.csv").then(dataset => {
+      // Heatmap scales
+      const actuXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([10, w + 10])
+        .padding(0.01);
+
+      const actuYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const actuBricks = svgActu1980.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => actuXScale(d.MQScore))
+        .attr("y", d => actuYScale(d.Month))
+        .attr("width", actuXScale.bandwidth())
+        .attr("height", actuYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      const yearset1980actu = ["1980•", "1979•", "1978•", "1977•", "1976•", "1975•", "1974•", "1973•", "1972•", "1971•"]
+
+      const years1980actu = svgActu1980.selectAll("text")
+        .data(yearset1980actu)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * -12 * (h / 120))
+        .attr("y", 9)
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .text((d, i) => d);
+    })
+    // end of Actu1980 csv
+
+
+    // 1980 Alt Heatmap Content
+    d3.csv("DASC_18yr_alt_sorted_1980.csv").then(dataset => {
+      // Heatmap scales
+      const altXScale = d3.scaleBand()
+        .domain(MQScores)
+        .range([0, w])
+        .padding(0.01);
+
+      const altYScale = d3.scaleBand()
+        .domain(dataset.map(d => d.Month))
+        .range([0, h])
+        .padding(0.01);
+      // Create bricks
+      const altBricks = svgAlt1980.selectAll()
+        .data(dataset, d => d.MQScore + ':' + d.Month)
+        .enter()
+        .append("rect")
+        .attr("x", d => altXScale(d.MQScore))
+        .attr("y", d => altYScale(d.Month))
+        .attr("width", altXScale.bandwidth())
+        .attr("height", altYScale.bandwidth())
+        .attr("class", "brick")
+        .call(heatmap);
+
+      const yearset1980alt = ["•1980", "•1979", "•1978", "•1977", "•1976", "•1975", "•1974", "•1973", "•1972", "•1971"]
+
+      const years1980alt = svgAlt1980.selectAll("text")
+        .data(yearset1980alt)
+        .enter()
+        .append("text")
+        .attr("class", "timeLabels")
+        .attr("x", (d, i) => i * 12 * (h / 120))
+        .attr("y", -201)
+        .attr("text-anchor", "beginning")
+        .attr("transform", "rotate(90)")
+        .text((d, i) => d);
+    })
+      // end of Alt1980 csv
+
+      // 1980 Pie / Doughnut Content and actions
+      d3.csv("roeVwade_dataset.csv").then(dataset => {
+        // PIE
+        //create wedges
+        const Pi1980arcs = d3.arc()
+          .innerRadius(DMinnerRadius)
+          .outerRadius(DMouterRadius);
+        //generate pie
+        const Pi1980 = d3.pie().value(d => d.pievalue).sort(null);
+        //transform translate for arcs
+        const Pi1980groups = svgPD1980.selectAll("g.Pi1980arc")
+          .data(Pi1980(dataset))
+          .enter()
+          .append("g")
+          .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+        const Pi1980path = Pi1980groups.append("path")
+          .attr("d", Pi1980arcs)
+          .data(dataset)
+          .attr("fill", (d => DMColor(+d.voteVal)))
+          .attr("class", "DMarc")
+          .attr("id", "Pi1980path");
+
+        // DOUGHNUT
+        const Do1980arcs = d3.arc()
+          .innerRadius(innerRadius)
+          .outerRadius(outerRadius);
+        const Do1980 = d3.pie().value(d => d.pievalue).sort(null);
+
+        const Do1980groups = svgPD1980.selectAll("g.arc")
+          .data(Do1980(dataset))
+          .enter()
+          .append("g")
+          .attr("class", "JustArc")
+          .attr("transform", "translate(" + PDwidth / 2 + "," + PDheight / 2 + ")");
+
+        const Do1980path = Do1980groups.append("path")
+          .attr("stroke", "cornsilk")
+          .attr("stroke-width", "2px")
+          .attr("d", Do1980arcs)
+          .data(dataset)
+          .attr("fill", (d => DMColor(+d.voteVal)))
+          .attr("id", "Do1980path")
+          .on("mouseover", (event, d) => {
+            d3.selectAll("#Do1980path")
+              .transition()
+              .duration(800)
+              .attr("fill", (d => MQColor(+d.MQScore)))
+          })
+          .on("mouseout", (event, d) => {
+            d3.selectAll("#Do1980path")
+              .transition()
+              .duration(800)
+              .attr("fill", (d => DMColor(+d.voteVal)));
+          });
+        // PD1980 Labels and such
+        // Take another look at centroid labels
+        Do1980groups.append("text")
+          .attr("transform", d => "translate(" + Do1980arcs.centroid(d) + ")")
+          .attr("text-anchor", "middle")
+          .attr("class", "PiLabels")
+          .attr("id", "Do1980label")
+          .data(dataset)
+          .text(d => d.justice);
+
+        const MDlabel1 = svgPD1980.append("text")
+          .attr("class", "MDLabels")
+          .attr("x", PDwidth / 2 - 10)
+          .attr("y", PDheight / 2 - 10)
+          .attr("text-anchor", "end")
+          .text("Majority")
+          .attr("id", "MD1980label1");
+
+        const MDlabel2 = svgPD1980.append("text")
+          .attr("class", "MDLabels")
+          .attr("x", PDwidth / 2 + 10)
+          .attr("y", PDheight / 2 - 10)
+          .attr("text-anchor", "beginning")
+          .text("Dissent")
+          .attr("id", "MD1980label2");;
+
+        const Do1980decision = svgPD1980.append("text")
+          .attr("class", "decision")
+          .attr("x", PDwidth / 2)
+          .attr("y", PDheight / 2 - 30)
+          .attr("text-anchor", "middle")
+          .text("7-2")
+          .attr("id", "MD1980Decision");
+
+        const Do1980Description = svgPD1980.append("text")
+          .attr("class", "description")
+          .attr("x", PDwidth / 2)
+          .attr("y", PDheight / 2 + 30)
+          .attr("text-anchor", "middle")
+          .text("Abortion Rights Protected")
+          .call(wrap, 180)
+          .attr("id", "MD1980Description");
+
+        svgActu1980.append("rect")
+          .attr("x", 0)
+          .attr("y", 95 * (h / 120))
+          .attr("width", w)
+          .attr("height", h / 120)
+          .attr("class", "highlight")
+          .attr("opacity", 0.5)
+          .attr("id", "actu1980high");
+
+        svgAlt1980.append("rect")
+          .attr("x", 0)
+          .attr("y", 95 * (h / 120))
+          .attr("width", w)
+          .attr("height", h / 120)
+          .attr("class", "highlight")
+          .attr("opacity", 0.0)
+          .attr("id", "alt1980high");
+
+        d3.selectAll("input[value='actu1980']")
+          .on("change", (event, d) => {
+            // highlight row in heatmap
+            d3.selectAll("#actu1980high")
+              .attr("opacity", 0.5);
+
+            d3.selectAll("#alt1980high")
+              .attr("opacity", 0.0);
+
+            d3.selectAll("#Do1980path")
+              .attr("fill", (d => DMColor(+d.voteVal)))
+              .on("mouseover", (event, d) => {
+                d3.selectAll("#Do1980path")
+                  .transition()
+                  .duration(800)
+                  .attr("fill", (d => MQColor(+d.MQScore)))
+              })
+              .on("mouseout", (event, d) => {
+                d3.selectAll("#Do1980path")
+                  .transition()
+                  .duration(800)
+                  .attr("fill", (d => DMColor(+d.voteVal)));
+              });
+            d3.selectAll("#Pi1980path")
+              .attr("fill", (d => DMColor(+d.voteVal)));
+
+            d3.selectAll("#Do1980label")
+              .data(dataset)
+              .text(d => d.justice);
+
+            d3.selectAll("#MD1980label1")
+              .text("Majority");
+            d3.selectAll("#MD1980label2")
+              .text("Dissent");
+            d3.selectAll("#MD1980Decision")
+              .text("7-2");
+            d3.selectAll("#MD1980Description")
+              .text("Abortion Rights Protected")
+              .call(wrap, 180);
+          });
+
+        d3.selectAll("input[value='alt1980']")
+          .on("change", (event, d) => {
+
+            d3.selectAll("#alt1980high")
+              .attr("opacity", 0.5);
+
+            d3.selectAll("#actu1980high")
+              .attr("opacity", 0.0);
+
+            d3.selectAll("#Do1980path")
+              .attr("fill", (d => DMColor(+d.altVoteVal)))
+              .on("mouseover", (event, d) => {
+                d3.selectAll("#Do1980path")
+                  .transition()
+                  .duration(800)
+                  .attr("fill", (d => MQColor(+d.altMQScore)))
+              })
+              .on("mouseout", (event, d) => {
+                d3.selectAll("#Do1980path")
+                  .transition()
+                  .duration(800)
+                  .attr("fill", (d => DMColor(+d.altVoteVal)));
+              });
+            d3.selectAll("#Pi1980path")
+              .attr("fill", (d => DMColor(+d.altVoteVal)));
+
+            d3.selectAll("#Do1980label")
+              .data(dataset)
+              .text(d => d.altJustice);
+
+            d3.selectAll("#MD1980label1")
+              .text("Dissent");
+            d3.selectAll("#MD1980label2")
+              .text("Majority");
+            d3.selectAll("#MD1980Decision")
+              .text("4-5");
+            d3.selectAll("#MD1980Description")
+              .text("Abortion Rights Not Protected")
+              .call(wrap, 180);
+          });
+      })
+    // end of PD1980 csv
+
+    // }) remnant, but since I noticed it late, keeping ot here as a reminder...
+  </script>
+
+</body>
+
+</html>
