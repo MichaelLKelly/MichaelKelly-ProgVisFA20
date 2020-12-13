@@ -11,6 +11,9 @@ This project builds on and dynamically presents research undertaken in a concurr
 ------------------------
 The screenshots below document the structure and interactive features of the project, and a working GitHub Page showing full interaction is [here] (https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
 
+
+[GitHub](http://github.com)
+
 1. Introduction
 Even the opening illustration utilizes d3, to create an homage to Justice Ruth Bader Ginsburg’s trademark collars as a half-doughnut chart, featuring nine arcs.
 
