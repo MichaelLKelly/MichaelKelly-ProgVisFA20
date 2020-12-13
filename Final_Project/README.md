@@ -1,7 +1,3 @@
-IN PROGRESS
-
-
-
 Final Project
 ======================
 An Alternate SCOTUS Portrait 
@@ -30,6 +26,7 @@ Hovering over the doughnut chart reveals the same ideological color-coding as th
 
 <h2>5. Actual / Alternate Toggle</h2>
 While in the default Actual state, a line highlights the month in the Actual heatmap that the Actual case took place, while the pie / doughnut combination reflects that Actual data in detail. (All as seen above.) When the Alternate radio button is selected, the highlight line switches to the Alternate heatmap on the right and the decision data switches to reflect that.
+
 ![SCOTUS_Final_CUvFEC_alt.png](/Final_Project/SCOTUS_Final_CUvFEC_alt.png "SCOTUS Case Study: Alternate")
 
 Likewise, the mouseover now reflects the ideological scores of the Alternate Justices.
