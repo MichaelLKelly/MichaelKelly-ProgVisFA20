@@ -1,0 +1,10 @@
+﻿id,case,decided,justice,MQScore,vote,voteVal,altJustice,altMQScore,altVote,altVoteVal,pievalue
+1,bushVgore,12122000,W Rehnquist,2.969,D,0,W Rehnquist,2.969,M,1,1
+2,bushVgore,12122000,W Burger,1.89,M,1,W Burger,1.89,M,1,1
+3,bushVgore,12122000,W Brennan,1.7802,M,1,W Brennan,1.7802,M,1,1
+4,bushVgore,12122000,L Powell,0.9696,M,1,L Powell,0.9696,M,1,1
+5,bushVgore,12122000,B White,0.436,D,0,B White,0.436,M,1,1
+6,bushVgore,12122000,P Stewart,0.4022,M,1,P Stewart,0.4022,D,0,1
+7,bushVgore,12122000,H Blackmun,-0.0273,M,1,H Blackmun,-0.0273,D,0,1
+8,bushVgore,12122000,T Marshall,-2.8313,M,1,T Marshall,-2.8313,D,0,1
+9,bushVgore,12122000,W Douglas,-4.725,M,1,W Douglas,-4.725,D,0,1

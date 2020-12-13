@@ -1,0 +1,10 @@
+﻿id,case,decided,justice,MQScore,vote,voteVal,altJustice,altMQScore,altVote,altVoteVal,pievalue
+1,obergefellVhodges,6262015,C Thomas,3.6037,D,0,S Alito,1.8167,D,0,1
+2,obergefellVhodges,6262015,A Scalia,2.5145,D,0,[GWBush 4],1.3735,D,0,1
+3,obergefellVhodges,6262015,S Alito,1.8167,D,0,[GWBush 3],1.3735,D,0,1
+4,obergefellVhodges,6262015,J Roberts,0.9303,D,0,J Roberts,0.9303,D,0,1
+5,obergefellVhodges,6262015,A Kennedy,0.6823,M,1,[Clinton 4],-1.4821,M,1,1
+6,obergefellVhodges,6262015,S Breyer,-1.2332,M,1,E Kagan,-1.5824,M,1,1
+7,obergefellVhodges,6262015,E Kagan,-1.5824,M,1,[Obama 4],-2.1309,M,1,1
+8,obergefellVhodges,6262015,R Ginsburg,-1.731,M,1,[Obama 3],-2.1309,M,1,1
+9,obergefellVhodges,6262015,S Sotomayor,-2.6794,M,1,S Sotomayor,-2.6794,M,1,1
