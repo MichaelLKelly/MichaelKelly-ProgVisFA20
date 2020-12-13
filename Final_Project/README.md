@@ -9,7 +9,7 @@ An Alternate SCOTUS Portrait
 This project builds on and dynamically presents research undertaken in a concurrent Data Analysis course, which explored the effects of a theoretical 18-year term limit imposed on the U.S. Supreme Court in 1971. That project consisted of hand-generated tables that were color-coded as ‘Actual’ and ‘Alternate’ heatmaps to show the ideology of the Court over the 50 years from then until the sitting Court. Select cases (one for each decade) were then examined to explore how an Alternate Court’s composition might have changed the Actual ruling. This project took the story told by that research and its accompanying report and translated it into an interactive bit of storytelling, utilizing d3, html, css and javascript.
 
 ------------------------
-The screenshots below document the structure and interactive features of the project, and a working GitHub Page showing full interaction is here.
+The screenshots below document the structure and interactive features of the project, and a working GitHub Page showing full interaction is [here] (https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
 
 1. Introduction
 Even the opening illustration utilizes d3, to create an homage to Justice Ruth Bader Ginsburg’s trademark collars as a half-doughnut chart, featuring nine arcs.
