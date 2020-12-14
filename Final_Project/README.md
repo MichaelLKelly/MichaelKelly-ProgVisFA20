@@ -21,7 +21,6 @@ Each case study contains an Actual and Alternate heatmap, showing the decade bro
 <h2>3. A Case Study in Detail</h2>
 The case study shown for the next few screenshots is example is Citizens United v. FEC, which showcases all changes that may result from interactivity within a particular case study.) To view all cases, one can visit the [working GitHub Page](https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
 
-
 ![SCOTUS_Final_CUvFEC_actu.png](/Final_Project/SCOTUS_Final_CUvFEC_actu.png "SCOTUS Case Study: Actual")
 
 <h2>4. Ideological Mouseover</h2>
