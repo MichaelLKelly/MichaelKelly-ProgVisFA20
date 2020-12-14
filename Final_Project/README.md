@@ -19,12 +19,11 @@ Each case study contains an Actual and Alternate heatmap, showing the decade bro
 ![SCOTUS_Final_Structure.png](/Final_Project/SCOTUS_Final_Structure.png "SCOTUS Structure")
 
 <h2>3. A Case Study in Detail</h2>
-The case study shown for the next few screenshots is example is Citizens United v. FEC, which showcases all changes that may result from interactivity within a particular case study.) 
-
-
-To view all cases, one can visit the [working GitHub Page](https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
+The case study shown for the next few screenshots is for Citizens United v. FEC, which showcases all changes that may result from interactivity within a particular case study.* The default view shows the Actual decision, as well as Court and vote composition, with a plain language explanation of the outcome.
 
 ![SCOTUS_Final_CUvFEC_actu.png](/Final_Project/SCOTUS_Final_CUvFEC_actu.png "SCOTUS Case Study: Actual")
+
+*To view all cases, one can visit the [working GitHub Page](https://michaellkelly.github.io/MichaelKelly-ProgVisFA20/SCOTUS/).
 
 <h2>4. Ideological Mouseover</h2>
 Hovering over the doughnut chart reveals the same ideological color-coding as the heatmaps, applied to the individual Justices.
