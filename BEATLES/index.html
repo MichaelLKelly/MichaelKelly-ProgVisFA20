@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Beatles Collection (SvL)</title>
+    <script type="text/javascript" src= "https://d3js.org/d3.v6.js"></script>
+    <style type="text/css">
+
+    h1 {
+      font-family: "Helvetica", sans-serif;
+      font-size: 24px;
+      color: tomato;
+    }
+
+    .axisb path,
+    .axisb line{
+      stroke: salmon;
+    }
+    .axisb text{
+      font-family: "Helvetica", sans-serif;
+      font-size: 12px;
+    }
+
+    .axisl path,
+    .axisl line{
+      stroke: salmon;
+    }
+    .axisl text{
+      font-family: "Helvetica", sans-serif;
+      font-size: 10px;
+      font-weight: bold;
+      color: salmon;
+    }
+
+    .ylabel {
+      font-family: "Helvetica", sans-serif;
+      font-size: 12px;
+    }
+
+
+    #tooltip{
+      position: absolute;
+      width: 100px;
+      height: 30px;
+      padding: 2px;
+      text-align: left;
+      font-family:sans-serif;
+      font-size: 12px;
+      font-weight: 550;
+      background: salmon;
+      border-radius: 8px;
+    }
+
+
+    </style>
+  </head>
+  <body>
+    <h1>Who Likes Them More... Or At All?</h1>
+    <svg width="800" height="400" id="svg1"></svg>
+    <svg width="800" height="400" id="svg2"></svg>
+
+      <script type="text/javascript">
+
+// WRAP function
+
+function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
+
+
+
+
+      d3.csv("Beatles_SnL_collection_122020.csv").then(dataset =>{
+
+      const margin = 50;
+      const width = dataset.length * 100;
+      const height = 400;
+
+
+      // const maxX = d3.max(dataset, d => d.Number);
+      const maxY = 6;
+      // const maxY = d3.max(dataset, d => d.StevenAverage);
+      // const padding = 30;
+
+      const xScale = d3.scaleBand()
+          .domain(dataset.map(d => d.Album))
+          .range([margin, width-margin]);
+
+      const yScale = d3.scaleLinear()
+          .domain([0, maxY])
+          .range([height-margin, margin]);
+
+      const bottomAxis = d3.axisBottom()
+          .scale(xScale);
+
+      const leftAxis = d3.axisLeft()
+          .scale(yScale)
+          .ticks(6);
+
+      const svg1 = d3.select("#svg1")
+          .attr("width", width);
+
+      const text = svg1.append("text")
+          .attr("x", 30)
+          .attr("y", 30)
+          .text("Steven's Album Rankings So Far")
+          .attr("fill","green")
+          .attr("font-family","sans-serif");
+
+      const subtext = svg1.append("text")
+          .attr("class", "ylabel")
+          .attr("x", 60)
+          .attr("y", 60)
+          .text("Circle size represents relative percentage of songs that were 'liked' on that album.");
+
+      const tooltip =d3.select("body")
+          .append("div")
+          .attr("id", "tooltip")
+          .style("opacity", 0);
+
+      svg1.selectAll("circle")
+          .data(dataset)
+          .enter()
+          .append("circle")
+          // .attr("cx", d => xScale(d.Album))
+          .attr("cx", d => xScale(d.Album) + (.5 * xScale.bandwidth()))
+          .attr("cy", d => yScale(d.StevenAverage))
+          // .attr("r", 20)
+          // .attr("r", d => ((.95 * xScale.bandwidth()))/2)
+          .attr("r", d => (d.StevenPercent * (.5 * xScale.bandwidth())))
+          .attr("fill", "salmon")
+          .on("click", (event, d)=> {
+            d3.select("#tooltip")
+            .transition()
+            .duration(300)
+            .delay(400)
+            .style("opacity", .8)
+            .style("left", (event.pageX) + 2 + "px")
+            .style("top", (event.pageY) + 2 + "px")
+            .text("Percent of Songs Liked: " + Math.round(d.StevenPercent * 100) + "%");
+            svg1.selectAll("circle")
+            .data(dataset)
+            .transition()
+            .duration(300)
+            .ease(d3.easeLinear)
+            .attr("r", d => (d.StevenPercent * (.5 * xScale.bandwidth())))
+            ;
+          })
+          // .on("click", (event, d)=>{
+          //   d3.select("#tooltip")
+          //     .transition()
+          //     .style("opacity", 0);
+          //     svg1.selectAll("circle")
+          //     .data(dataset)
+          //     .transition()
+          //     .duration(300)
+          //     .attr("r", d => ((.95 * xScale.bandwidth()))/2);
+          //   })
+          .on("mousemove", (event, d) =>{
+            d3.select("#tooltip")
+              .style("left", (event.pageX + 2) + "px")
+              .style("top", (event.pageY + 2) + "px")
+          });
+
+      svg1.selectAll("line")
+          .data(dataset)
+          .enter()
+          .append("line")
+          .attr("x1", d => xScale(d.Album) + (.05 * xScale.bandwidth()))
+          // .attr("x1", d => xScale(d.Album))
+          .attr("y1", d => yScale(d.StevenAverage))
+          .attr("x2", d => xScale(d.Album) + (.95 * xScale.bandwidth()))
+          // .attr("x2", d => xScale(d.Album) + (.60 * xScale.bandwidth()))
+          .attr("y2", d => yScale(d.StevenAverage))
+          .attr("stroke", "orangered")
+          .attr("stroke-width", "2px");
+
+
+      svg1.append("g")
+          .attr("class", "axisb")
+          .attr("transform", "translate(0," + (height - margin) +")")
+          .call(bottomAxis)
+          .selectAll(".tick text")
+            .attr("text-anchor", "middle")
+            .call(wrap, (xScale.bandwidth() - 10));
+
+      svg1.append("g")
+          .attr("class", "axisl")
+          .attr("transform", "translate(" + margin + ",0)")
+          .call(leftAxis);
+
+      svg1.append("text")
+          .attr("class","ylabel")
+          .attr("text-anchor", "middle")
+          .attr("x", -200)
+          .attr("y", 0)
+          .attr("dy", 20)
+          .attr("transform", "rotate(-90)")
+          .text("Average Song Score");
+
+
+          // Chart 2
+          const margin2 = 50;
+          const svgW = dataset.length * 100;
+          const svgH = 400;
+
+          const maxY2 = 6;
+
+
+          const newXScale = d3.scaleBand()
+              .domain(dataset.map(d => d.Album))
+              .range([margin2, svgW - margin2]);
+
+          const newYScale = d3.scaleLinear()
+              .domain([0, maxY2])
+              .range([svgH - margin2, margin2]);
+
+          const bottomAxis2 = d3.axisBottom()
+              .scale(newXScale);
+
+          const leftAxis2 = d3.axisLeft()
+              .scale(newYScale)
+              .ticks(6);
+
+          const svg2 = d3.select("#svg2")
+              .attr("width", svgW);;
+
+          const text2 = svg2.append("text")
+              .attr("x", 30)
+              .attr("y", 30)
+              .text("Lisa's Album Rankings So Far")
+              .attr("fill","green")
+              .attr("font-family","sans-serif");
+
+          const subtext2 = svg2.append("text")
+              .attr("class", "ylabel")
+              .attr("x", 60)
+              .attr("y", 60)
+              .text("Circle size represents relative percentage of songs that were 'liked' on that album.");
+
+          svg2.selectAll("circle")
+              .data(dataset)
+              .enter()
+              .append("circle")
+              .attr("cx", d => newXScale(d.Album) + (.5 * newXScale.bandwidth()))
+              .attr("cy", d => newYScale(d.LisaAverage))
+              .attr("r", d => (d.LisaPercent * (.5 * newXScale.bandwidth())))
+              .attr("fill", "salmon");
+
+          svg2.selectAll("line")
+              .data(dataset)
+              .enter()
+              .append("line")
+              .attr("x1", d => newXScale(d.Album) + (.05 * newXScale.bandwidth()))
+              .attr("y1", d => newYScale(d.LisaAverage))
+              .attr("x2", d => newXScale(d.Album) + (.95 * newXScale.bandwidth()))
+              .attr("y2", d => newYScale(d.LisaAverage))
+              .attr("stroke", "orangered")
+              .attr("stroke-width", "2px");
+
+
+          svg2.append("g")
+              .attr("class", "axisb")
+              .attr("transform", "translate(0," + (svgH - margin2) +")")
+              .call(bottomAxis2)
+              .selectAll(".tick text")
+                .attr("text-anchor", "middle")
+                .call(wrap, (newXScale.bandwidth() - 10));
+
+          svg2.append("g")
+              .attr("class", "axisl")
+              .attr("transform", "translate(" + margin2 + ",0)")
+              .call(leftAxis2);
+
+          svg2.append("text")
+              .attr("class","ylabel")
+              .attr("text-anchor", "middle")
+              .attr("x", -200)
+              .attr("y", 0)
+              .attr("dy", 20)
+              .attr("transform", "rotate(-90)")
+              .text("Average Song Score");
+
+})
+
+// Thanks again to Bostock on wrap:
+// https://bl.ocks.org/mbostock/7555321
+
+
+
+          // const margin2 = 50;
+          // const svgW = 600;
+          // const svgH = 400;
+          //
+          // const dataset2 = [
+          //       {"Song": "No Reply", "Steven": 1},
+          //       {"Song": "I'm A Loser", "Steven": 4},
+          //       {"Song": "Baby's in Black", "Steven": 0},
+          //       {"Song": "Rock and Roll Music", "Steven": 0},
+          //       {"Song": "I'll Follow the Sun", "Steven": 0},
+          //       {"Song": "Mr. Moonlight", "Steven": 0},
+          //       {"Song": "Honey Don't", "Steven": 0},
+          //       {"Song": "I'll Be Back", "Steven": 3},
+          //       {"Song": "She's a Woman", "Steven": 6},
+          //       {"Song": "I Feel Fine", "Steven": 5},
+          //       {"Song": "Everybody's Trying to Be My Baby", "Steven": 2},
+          // ];
+
+  // If not working when csv, add + sign to parse string
+          // const maxY2 = d3.max(dataset2, d => d.Steven);
+          //
+          // const newXScale = d3.scaleBand()
+          //       .domain(dataset2.map(d => d.Song))
+          //       .range([margin2, svgW - margin2])
+          //       .paddingInner(.04);
+          //
+          // const newYScale = d3.scaleLinear()
+          //       .domain([0, maxY2])
+          //       .range([svgH - margin2, margin2]);
+          //
+          // const bottomAxis2 = d3.axisBottom()
+          //       .scale(newXScale);
+          //
+          // const leftAxis2 = d3.axisLeft()
+          //       .scale(newYScale)
+          //       .ticks(6);
+          //
+          // const svg2 = d3.select("#svg2");
+          //
+          // const text2 = svg2.append("text")
+          //       .attr("x", 30)
+          //       .attr("y", 30)
+          //       .text("Steven's Beatles '65 Rankings")
+          //       .attr("fill","green")
+          //       .attr("font-family","sans-serif");
+          //
+          //
+          // svg2.selectAll("rect")
+          //     .data(dataset2)
+          //     .enter()
+          //     .append("rect")
+          //     .attr("x", d => newXScale(d.Song))
+          //     .attr("y", d => newYScale(d.Steven))
+          //     .attr("width", newXScale.bandwidth())
+          //     .attr("height", d => (svgH - margin2) - newYScale(d.Steven))
+          //     .attr("fill","salmon");
+          //
+          // svg2.append("g")
+          //     .attr("class", "axisb")
+          //     .attr("transform", "translate(0," + (svgH - margin2) + ")")
+          //     .call(bottomAxis2)
+          //     .selectAll("text")
+          //       .style("text-anchor", "start")
+          //       .attr("x", 0)
+          //       .attr("dx", 2)
+          //       .attr("dy", 2)
+          //       .attr("transform", d => "rotate(-90)");
+          //
+          // svg2.append("g")
+          //     .attr("class", "axisl")
+          //     .attr("transform", "translate(" +  margin2 + ",0)")
+          //     .call(leftAxis2);
+          //
+          // svg2.append("text")
+          //     .attr("class","ylabel")
+          //     .attr("text-anchor", "middle")
+          //     .attr("x", -200)
+          //     .attr("y", 0)
+          //     .attr("dy", 20)
+          //     .attr("transform", "rotate(-90)")
+          //     .text("Individual Rating");
+
+
+
+
+      </script>
+  </body>
+</html>
